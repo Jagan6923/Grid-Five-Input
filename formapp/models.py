@@ -6,10 +6,11 @@ class Project(models.Model):
 
 
 class DraggableInput(models.Model):
+    input_field_id = models.CharField(max_length=100, default='')
     data = models.CharField(max_length=255)
     x_axis = models.FloatField()
     y_axis = models.FloatField()
-    input_field_id = models.CharField(max_length=100, default='')  # You can adjust the max_length as needed
+    
 
     def __str__(self):
         return self.data
