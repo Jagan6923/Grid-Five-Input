@@ -178,23 +178,23 @@
       <div class="fade" id="alignment" role="tabpanel">
         <div class="grid" id="emptyGrid">
           <div>
-            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 1" id="draggableInput1"
+            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 1" id="draggablelabel1"
               draggable="true" ondragstart="startDrag(event)" style="left: 10px; top: 5px;">label 1 </label>
           </div>
           <div>
-            <label class="form-control form-control-sm smaller-input1" placeholder="Field 2" id="draggableInput2"
+            <label class="form-control form-control-sm smaller-input1" placeholder="Field 2" id="draggablelabel2"
               draggable="true" ondragstart="startDrag(event)" style="left: 120px; top: 5px;">label 2 </label>
           </div>
           <div>
-            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 3" id="draggableInput3"
+            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 3" id="draggablelabel3"
               draggable="true" ondragstart="startDrag(event)" style="left: 230px; top: 5px;">label 3 </label>
           </div>
           <div>
-            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 4" id="draggableInput4"
+            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 4" id="draggablelabel4"
               draggable="true" ondragstart="startDrag(event)" style="left: 340px; top: 5px;">label 4 </label>
           </div>
           <div>
-            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 5" id="draggableInput5"
+            <label class="form-control form-control-sm  smaller-input1" placeholder="Field 5" id="draggablelabel5"
               draggable="true" ondragstart="startDrag(event)" style="left: 450px; top: 5px;">label 5 </label>
           </div>
           <div>
@@ -475,6 +475,8 @@
         var x_axis = [];
         var y_axis = [];
         var input_field_ids = [];
+        var label_names = [];  // New array for label names
+        var label_ids = [];    // New array for label ids
 
         // Loop through all draggable input fields and collect their data
         $('.smaller-input').each(function () {
@@ -483,6 +485,18 @@
           y_axis.push(parseFloat($(this).css('top').replace('px', '')));
           input_field_ids.push($(this).attr('id'));
         });
+
+        // Loop through all draggable labels and collect their data
+        $('.smaller-input1').each(function () {
+          label_names.push($(this).text()); // Assuming label text is the name
+          label_ids.push($(this).attr('id'));
+        });
+
+        // Check if all arrays have the same length
+        if (data.length !== x_axis.length || data.length !== y_axis.length || data.length !== input_field_ids.length || data.length !== label_names.length || data.length !== label_ids.length) {
+          console.error("Array lengths do not match.");
+          return;
+        }
 
         // Send data to the server using AJAX
         $.ajax({
@@ -493,6 +507,8 @@
             'x_axis[]': x_axis,
             'y_axis[]': y_axis,
             'input_field_id[]': input_field_ids,
+            'label_name[]': label_names,  // Send label names
+            'label_id[]': label_ids,      // Send label ids
             'csrfmiddlewaretoken': '{{ csrf_token }}'
           },
           success: function (response) {
@@ -507,6 +523,7 @@
         });
       });
     });
+
 
 
   </script>

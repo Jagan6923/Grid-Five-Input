@@ -10,7 +10,8 @@ class DraggableInput(models.Model):
     data = models.CharField(max_length=255)
     x_axis = models.FloatField()
     y_axis = models.FloatField()
-    
+    label_name = models.CharField(max_length=255)  # New field for label name
+    label_id = models.CharField(max_length=100)    # New field for label id
 
     def __str__(self):
         return self.data
