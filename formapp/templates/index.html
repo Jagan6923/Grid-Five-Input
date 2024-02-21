@@ -474,12 +474,11 @@
         var x_axis = [];
         var y_axis = [];
         var input_field_ids = [];
-        var label_names = [];  // New array for label names
-        var label_ids = [];    // New array for label ids
-        var label_x_axis = [];  // New array for label x-axis
-        var label_y_axis = [];  // New array for label y-axis
+        var label_names = [];
+        var label_ids = [];
+        var label_x_axis = [];
+        var label_y_axis = [];
 
-        // Loop through all draggable input fields and collect their data
         $('.smaller-input').each(function () {
           data.push($(this).val());
           x_axis.push(parseFloat($(this).css('left').replace('px', '')));
@@ -487,21 +486,18 @@
           input_field_ids.push($(this).attr('id'));
         });
 
-        // Loop through all draggable labels and collect their data
         $('.smaller-input1').each(function () {
-          label_names.push($(this).text()); // Assuming label text is the name
+          label_names.push($(this).text());
           label_ids.push($(this).attr('id'));
-          label_x_axis.push(parseFloat($(this).css('left').replace('px', ''))); // Collect label x-axis
-          label_y_axis.push(parseFloat($(this).css('top').replace('px', ''))); // Collect label y-axis
+          label_x_axis.push(parseFloat($(this).css('left').replace('px', '')));
+          label_y_axis.push(parseFloat($(this).css('top').replace('px', '')));
         });
 
-        // Check if all arrays have the same length
         if (data.length !== x_axis.length || data.length !== y_axis.length || data.length !== input_field_ids.length || data.length !== label_names.length || data.length !== label_ids.length || data.length !== label_x_axis.length || data.length !== label_y_axis.length) {
           console.error("Array lengths do not match.");
           return;
         }
 
-        // Send data to the server using AJAX
         $.ajax({
           type: 'POST',
           url: '/save_draggable_input/',
@@ -510,10 +506,10 @@
             'x_axis[]': x_axis,
             'y_axis[]': y_axis,
             'input_field_id[]': input_field_ids,
-            'label_name[]': label_names,  // Send label names
-            'label_id[]': label_ids,      // Send label ids
-            'label_x_axis[]': label_x_axis,  // Send label x-axis
-            'label_y_axis[]': label_y_axis,  // Send label y-axis
+            'label_name[]': label_names,
+            'label_id[]': label_ids,
+            'label_x_axis[]': label_x_axis,
+            'label_y_axis[]': label_y_axis,
             'csrfmiddlewaretoken': '{{ csrf_token }}'
           },
           success: function (response) {

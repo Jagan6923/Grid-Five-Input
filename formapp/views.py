@@ -31,10 +31,10 @@ def save_draggable_input(request):
         input_field_ids = request.POST.getlist('input_field_id[]')
         label_names = request.POST.getlist('label_name[]')
         label_ids = request.POST.getlist('label_id[]')
-        label_x_axis = request.POST.getlist('label_x_axis[]')  # New field for label x-axis
-        label_y_axis = request.POST.getlist('label_y_axis[]')  # New field for label y-axis
+        label_x_axis = request.POST.getlist('label_x_axis[]')  
+        label_y_axis = request.POST.getlist('label_y_axis[]')  
 
-        # Loop through the received data and save each draggable input field
+        
         for i in range(len(data)):
             draggable_input = DraggableInput.objects.create(
                 data=data[i],
@@ -43,8 +43,8 @@ def save_draggable_input(request):
                 input_field_id=input_field_ids[i],
                 label_name=label_names[i],
                 label_id=label_ids[i],
-                label_x_axis=label_x_axis[i],  # Include label x-axis value
-                label_y_axis=label_y_axis[i]   # Include label y-axis value
+                label_x_axis=label_x_axis[i],  
+                label_y_axis=label_y_axis[i]   
             )
             draggable_input.save()
 
