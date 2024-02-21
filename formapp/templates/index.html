@@ -72,6 +72,21 @@
       position: absolute;
       pointer-events: none;
     }
+
+    #emptyGrid {
+      padding-bottom: 50px;
+      /* Add some padding at the bottom */
+    }
+
+    .field-label-container {
+      margin-top: 20px;
+      /* Add margin between existing content and new labels */
+    }
+
+    .field-label-container select {
+      width: 100px;
+      /* Reduce the width of the selection box */
+    }
   </style>
 </head>
 
@@ -170,6 +185,7 @@
             <button id="submitBtn" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-secondary ms-2 cancel-form">Cancel</button>
             <button type="reset" class="btn btn-danger ms-2">Reset</button>
+            <button type="button" class="btn btn-success ms-2 Preview">Preview</button>
           </div>
         </div>
 
@@ -397,6 +413,46 @@
         });
       });
     });
+    function showValueInAlignmentTab() {
+      // Retrieve the value entered in Form1 Field Name 1
+      var fieldValue = $('#form1 input[name="field1[]"]').val().trim();
+      var fieldTypeValue = $('#form1 select[name="selection1[]"]').clone(); // Clone the select box
+
+      // Create a container for label and select box
+      var container = $('<div class="field-label-container"></div>'); // Create a container
+
+      // Create a label element with the retrieved value below Field 1 inside the grid in the Alignment Tab
+      if (fieldValue !== '') {
+        var labelElement = $('<label class="form-control form-control-sm smaller-input1"></label>').text(fieldValue);
+        labelElement.css({
+          'position': 'absolute',
+          'left': '10px',
+          'top': '100px' // Adjust the top position as needed
+        });
+        container.append(labelElement); // Append label to the container
+      }
+
+      // Append select box to the container
+      fieldTypeValue.css({
+        'position': 'absolute',
+        'left': '8px',
+        'top': '130px' // Adjust the top position as needed
+      });
+      container.append(fieldTypeValue);
+
+      // Append the container after the draggable input fields
+      $('#emptyGrid').append(container);
+    }
+
+    // Event listener for the Preview button click
+    $(".Preview").click(function () {
+      // Switch to the Alignment Tab before executing the function
+      $('.nav-tabs a[href="#alignment"]').tab('show');
+      // Call the function to show the value in the Alignment Tab
+      showValueInAlignmentTab();
+    });
+
+
     document.getElementById("submitBtn")
       .addEventListener("click", function () { alert("Thank you for submitting!"); });
 
