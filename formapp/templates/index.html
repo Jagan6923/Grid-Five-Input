@@ -170,6 +170,7 @@
             <button id="submitBtn" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-secondary ms-2 cancel-form">Cancel</button>
             <button type="reset" class="btn btn-danger ms-2">Reset</button>
+            <button type="preview" id="preview" class="btn btn-success ms-2">Preview</button>
           </div>
         </div>
 
@@ -524,7 +525,102 @@
         });
       });
     });
+    $(document).ready(function () {
+      // Other existing code...
 
+      // Automatically switch to the second tab when the preview button is clicked
+      $('#preview').on('click', function () {
+        // Show the second tab and hide the first tab
+        $('#formCreation').removeClass('show active');
+        $('#alignment').addClass('show active');
+
+        // Trigger click event on the tab link corresponding to the second tab
+        $('a[href="#alignment"]').tab('show');
+      });
+
+      // Other existing code...
+    });
+
+    $(document).ready(function () {
+      // Function to add drag and drop functionality to newly created labels and fields
+      function addDraggableFunctionality() {
+        $(".smaller-input1").draggable({
+          containment: "#emptyGrid", // Restrict dragging within the grid
+          cursor: "move", // Set cursor style to indicate draggability
+          revert: true // Revert the element if not dropped on a valid target
+        });
+
+        $(".smaller-input").draggable({
+          containment: "#emptyGrid", // Restrict dragging within the grid
+          cursor: "move", // Set cursor style to indicate draggability
+          revert: true // Revert the element if not dropped on a valid target
+        });
+
+        $("#emptyGrid").droppable({
+          drop: function (event, ui) {
+            // Get the position of the dropped element relative to the grid
+            var offsetX = ui.offset.left - $(this).offset().left;
+            var offsetY = ui.offset.top - $(this).offset().top;
+
+            // Set the position of the dropped element within the grid
+            ui.draggable.css({
+              left: offsetX + "px",
+              top: offsetY + "px"
+            });
+
+            // Append the dropped element to the grid
+            $(this).append(ui.draggable);
+          }
+        });
+      }
+
+      // Call the function initially to apply drag and drop functionality to existing elements
+      addDraggableFunctionality();
+
+      // Add event listener to detect changes in "Field name 1" input field
+      $('.dynamic-form').on('input', '[name*=field1]', function () {
+        var labelName = $(this).val().trim(); // Get the value of the input field
+        if (labelName !== '') { // Check if the value is not empty
+          // Create a new label element
+          var newLabel = $('<label>').addClass('form-control form-control-sm smaller-input1')
+            .text(labelName)
+            .css({
+              'position': 'absolute',
+              'top': '200px', // Adjust top position
+              'left': '10px', // Adjust left position
+              'margin-bottom': '10px' // Add gap between elements
+            });
+          // Append the new label to the grid in Tab 2
+          $('#emptyGrid').append($('<div>').append(newLabel));
+          // Apply drag and drop functionality to the newly created label
+          addDraggableFunctionality();
+        }
+      });
+
+      // Add event listener to detect changes in "Select option" dropdown
+      $('.dynamic-form').on('change', '[name*=selection1]', function () {
+        var optionText = $(this).find(':selected').text(); // Get the selected option text
+        // Create a new input element
+        var newInput = $('<input>').attr('type', 'text')
+          .addClass('form-control form-control-sm mt-3 smaller-input')
+          .attr('placeholder', optionText)
+          .css({
+            'position': 'absolute',
+            'top': '230px', // Adjust top position for input field
+            'left': '10px', // Adjust left position
+            'margin-bottom': '10px' // Add gap between elements
+          });
+        // Append the new input to the grid in Tab 2
+        $('#emptyGrid').append($('<div>').append(newInput));
+        // Apply drag and drop functionality to the newly created input field
+        addDraggableFunctionality();
+      });
+    });
+
+    // Function to handle drag events
+    function startDrag(event) {
+      event.dataTransfer.setData("text", event.target.id); // Set the data being dragged
+    }
 
 
 
