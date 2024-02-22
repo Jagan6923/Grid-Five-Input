@@ -414,20 +414,17 @@
       });
     });
     function showValueInAlignmentTab() {
-      // Retrieve the value entered in Form1 Field Name 1
       var fieldValue = $('#form1 input[name="field1[]"]').val().trim();
-      var fieldTypeValue = $('#form1 select[name="selection1[]"]').clone(); // Clone the select box
+      var fieldTypeValue = $('#form1 select[name="selection1[]"]').clone(); 
 
-      // Create a container for label and select box
-      var container = $('<div class="field-label-container"></div>'); // Create a container
+      var container = $('<div class="field-label-container"></div>'); 
 
-      // Create a label element with the retrieved value below Field 1 inside the grid in the Alignment Tab
-      if (fieldValue !== '') {
+     if (fieldValue !== '') {
         var labelElement = $('<label class="form-control form-control-sm smaller-input1"></label>').text(fieldValue);
         labelElement.css({
           'position': 'absolute',
           'left': '10px',
-          'top': '100px' // Adjust the top position as needed
+          'top': '100px'
         });
         container.append(labelElement); // Append label to the container
       }
@@ -435,8 +432,8 @@
       // Append select box to the container
       fieldTypeValue.css({
         'position': 'absolute',
-        'left': '8px',
-        'top': '130px' // Adjust the top position as needed
+        'left': '70px',
+        'top': '100px' // Adjust the top position as needed
       });
       container.append(fieldTypeValue);
 
