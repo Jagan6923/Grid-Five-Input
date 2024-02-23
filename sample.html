@@ -113,3 +113,13 @@
 
 
 </div>
+<script>
+$('#preview').on('click', function () {
+  // Show the second tab and hide the first tab
+  $('#formCreation').removeClass('show active');
+  $('#alignment').addClass('show active');
+
+  // Trigger click event on the tab link corresponding to the second tab
+  $('a[href="#alignment"]').tab('show');
+});
+</script>
