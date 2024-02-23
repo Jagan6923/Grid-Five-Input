@@ -40,38 +40,10 @@
     }
 
     .grid {
-      background-color: #3498db;
-      width: 1110px;
+      background-color: #c4e5fa;
+      width: 100%;
       height: 430px;
       position: relative;
-      border-radius: 10px;
-      margin-left: 75px;
-    }
-
-    .smaller-input {
-      width: auto;
-      max-width: 80px;
-      min-width: 80px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-radius: 4px;
-    }
-
-
-    .smaller-input1 {
-      width: auto;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgb(231, 217, 217);
-      border-radius: 4px;
-      color: rgb(17, 44, 54);
-    }
-
-    .draggable-label {
-      position: absolute;
-      pointer-events: none;
     }
   </style>
 </head>
@@ -171,63 +143,20 @@
             <button id="submitBtn" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-secondary ms-2 cancel-form">Cancel</button>
             <button type="reset" class="btn btn-danger ms-2">Reset</button>
+            <button type="button" class="btn btn-success Preview">Preview</button>
           </div>
         </div>
-
+        <div class="tab-pane fade" id="alignment">
+          <div class="grid" id="emptyGrid">
+          </div>
+        </div>
+        <div class="tab-pane fade" id="tabContent3" style="height: 300px;"></div>
 
 
       </div>
     </div>
   </div>
 
-    <div class=" fade mb-3" id="alignment" role="tabpanel">
-      <div class="grid" id="emptyGrid">
-        <div>
-          <label class="form-control form-control-sm  smaller-input1" placeholder="Field 1" id="draggablelabel1"
-            draggable="true" ondragstart="startDrag(event)" style="left: 10px; top: 5px;">label 1 </label>
-        </div>
-        <div>
-          <label class="form-control form-control-sm smaller-input1" placeholder="Field 2" id="draggablelabel2"
-            draggable="true" ondragstart="startDrag(event)" style="left: 120px; top: 5px;">label 2 </label>
-        </div>
-        <div>
-          <label class="form-control form-control-sm  smaller-input1" placeholder="Field 3" id="draggablelabel3"
-            draggable="true" ondragstart="startDrag(event)" style="left: 230px; top: 5px;">label 3 </label>
-        </div>
-        <div>
-          <label class="form-control form-control-sm  smaller-input1" placeholder="Field 4" id="draggablelabel4"
-            draggable="true" ondragstart="startDrag(event)" style="left: 340px; top: 5px;">label 4 </label>
-        </div>
-        <div>
-          <label class="form-control form-control-sm  smaller-input1" placeholder="Field 5" id="draggablelabel5"
-            draggable="true" ondragstart="startDrag(event)" style="left: 450px; top: 5px;">label 5 </label>
-        </div>
-        <div>
-          <input type="text" class="form-control form-control-sm mt-3 smaller-input" placeholder="Field 1"
-            id="draggableInput1" draggable="true" ondragstart="startDrag(event)" style="left: 10px; top: 30px;">
-        </div>
-        <div>
-          <input type="text" class="form-control form-control-sm mt-3 smaller-input" placeholder="Field 2"
-            id="draggableInput2" draggable="true" ondragstart="startDrag(event)" style="left: 120px; top: 30px;">
-        </div>
-        <div>
-          <input type="text" class="form-control form-control-sm mt-3 smaller-input" placeholder="Field 3"
-            id="draggableInput3" draggable="true" ondragstart="startDrag(event)" style="left: 230px; top: 30px;">
-        </div>
-        <div>
-          <input type="text" class="form-control form-control-sm mt-3 smaller-input" placeholder="Field 4"
-            id="draggableInput4" draggable="true" ondragstart="startDrag(event)" style="left: 340px; top: 30px;">
-        </div>
-        <div>
-          <input type="text" class="form-control form-control-sm mt-3 smaller-input" placeholder="Field 5"
-            id="draggableInput5" draggable="true" ondragstart="startDrag(event)" style="left: 450px; top: 30px;">
-        </div>
-
-      </div>
-      <div class="container mt-3">
-        <button type="submit" class="btn btn-primary" id="gridsubmitButton">Submit</button>
-        <span id="confirmationMessage" class="bg-info"></span>
-      </div>
 
 
   </div>
@@ -446,87 +375,34 @@
         });
       });
     });
-    document.addEventListener("DOMContentLoaded", function () {
-      const emptyGrid = document.getElementById("emptyGrid");
+    $(".Preview").click(function () {
+      // Switch to the Alignment Tab
+      $('a[href="#alignment"]').tab('show');
 
-      emptyGrid.addEventListener("dragover", function (event) {
-        event.preventDefault();
-      });
+      // Clear existing content in the Alignment Tab
+      $('#emptyGrid').empty();
 
-      emptyGrid.addEventListener("drop", function (event) {
-        event.preventDefault();
-        const offsetX = event.offsetX - (event.dataTransfer.getData("text/plain").includes('input') ? 0 : 50);
-        const offsetY = event.offsetY - (event.dataTransfer.getData("text/plain").includes('input') ? 0 : 15);
-        const draggedElementId = event.dataTransfer.getData("text/plain");
-        const draggedElement = document.getElementById(draggedElementId);
-        const fieldId = draggedElement.getAttribute("data-field-id");
-        draggedElement.style.left = offsetX + "px";
-        draggedElement.style.top = offsetY + "px";
-        emptyGrid.appendChild(draggedElement);
-      });
-    });
+      // Get data from Form 1 and create labels
+      $('#formCreation .dynamic-form').each(function () {
+        var formId = $(this).attr('id');
+        var formName = $(this).find('input[id$="-name"]').val();
+        var redirectPath = $(this).find('input[id$="-redirect"]').val();
+        var fieldName1 = $(this).find('input[id$="-field1"]').val();
+        var selectedFieldType = $(this).find('select[id$="-fieldType1"] option:selected').text(); // Get selected field type text
 
-    function startDrag(event) {
-      event.dataTransfer.setData("text/plain", event.target.id);
-    }
-    $(document).ready(function () {
-      $('#gridsubmitButton').click(function () {
-        var data = [];
-        var x_axis = [];
-        var y_axis = [];
-        var input_field_ids = [];
-        var label_names = [];
-        var label_ids = [];
-        var label_x_axis = [];
-        var label_y_axis = [];
+        // Construct HTML for labels
+        var labelHtml = `<div class="label">${formName}  ${redirectPath}</div>`;
+        $('#emptyGrid').append(labelHtml);
 
-        $('.smaller-input').each(function () {
-          data.push($(this).val());
-          x_axis.push(parseFloat($(this).css('left').replace('px', '')));
-          y_axis.push(parseFloat($(this).css('top').replace('px', '')));
-          input_field_ids.push($(this).attr('id'));
-        });
+        // Append data from Form1 Field Name 1 below the label with space
+        var fieldDataHtml = `<div style="margin-bottom: 10px;">${fieldName1}</div>`;
+        $('#emptyGrid').append(fieldDataHtml);
 
-        $('.smaller-input1').each(function () {
-          label_names.push($(this).text());
-          label_ids.push($(this).attr('id'));
-          label_x_axis.push(parseFloat($(this).css('left').replace('px', '')));
-          label_y_axis.push(parseFloat($(this).css('top').replace('px', '')));
-        });
-
-        if (data.length !== x_axis.length || data.length !== y_axis.length || data.length !== input_field_ids.length || data.length !== label_names.length || data.length !== label_ids.length || data.length !== label_x_axis.length || data.length !== label_y_axis.length) {
-          console.error("Array lengths do not match.");
-          return;
-        }
-
-        $.ajax({
-          type: 'POST',
-          url: '/save_draggable_input/',
-          data: {
-            'data[]': data,
-            'x_axis[]': x_axis,
-            'y_axis[]': y_axis,
-            'input_field_id[]': input_field_ids,
-            'label_name[]': label_names,
-            'label_id[]': label_ids,
-            'label_x_axis[]': label_x_axis,
-            'label_y_axis[]': label_y_axis,
-            'csrfmiddlewaretoken': '{{ csrf_token }}'
-          },
-          success: function (response) {
-            $('#confirmationMessage').removeClass('bg-danger').addClass('bg-info').text('Data submitted successfully!');
-            setTimeout(function () {
-              $('#confirmationMessage').text('');
-            }, 2000);
-          },
-          error: function (xhr, status, error) {
-            console.error(xhr.responseText);
-          }
-        });
+        // Append selected field type text as an input box with space
+        var fieldTypeHtml = `<div style="margin-bottom: 10px;"><input type="text" class="form-control" value="${selectedFieldType}" placeholder="selected Value"></div>`;
+        $('#emptyGrid').append(fieldTypeHtml);
       });
     });
-
-
 
 
   </script>
