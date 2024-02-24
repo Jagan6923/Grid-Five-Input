@@ -59,12 +59,12 @@
 
     .draggable {
       cursor: grab;
-      /* Change cursor to grab to indicate draggable */
+
     }
 
     .dragging {
       opacity: 0.5;
-      /* Reduce opacity of dragged element */
+
     }
 
     #projectbutton {
@@ -89,13 +89,15 @@
       <a class="navbar-brand" href="#">Web components</a>
     </div>
   </nav>
-  <form id="projectForm" class="mb-3">
-    <input id="searchInput" type="text" class="form-control mb-3 " placeholder="Search...">
-    <input type="text" id="projectName" placeholder="Enter project name">
-    <button type="submit" class="btn btn-primary" id="projectbutton">Submit</button>
-    <span id="successMessage" class="bg-success"></span>
-    <span id="errorMessage" class="bg-danger"></span>
-  </form>
+  <div>
+    <form id="projectForm" class="mb-3">
+      <input id="searchInput" type="text" class="form-control mb-3 " placeholder="Search...">
+      <input type="text" id="projectName" placeholder="Enter project name">
+      <button type="submit" class="btn btn-primary" id="projectbutton">Submit</button>
+      <span id="successMessage" class="bg-success"></span>
+      <span id="errorMessage" class="bg-danger"></span>
+    </form>
+  </div>
   <div class="text-white">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -182,7 +184,7 @@
       <div class="tab-pane fade" id="tabContent2">
         <div class="grid" id="emptyGrid"></div>
       </div>
-      <div class="tab-pane fade" id="tabContent3" style="height: 300px;"></div>
+      <div class="tab-pane fade" id="tabContent3" style="height: 500px;width: 1100px;"></div>
     </div>
   </div>
 
@@ -401,15 +403,12 @@
           var formName = $(this).find('input[id$="-name"]').val();
           var redirectPath = $(this).find('input[id$="-redirect"]').val();
           var formHtml = '';
-
-          var labelHtml = `<div style="margin-bottom: 15px;" class="label label-large">${formName} ${redirectPath}</div>`;
+          var labelHtml = `<div style="margin-bottom: 15px;" class="label label-large">${formName} </div>`;
           formHtml += labelHtml;
 
           $(this).find('.dynamic-field').each(function () {
             var fieldName = $(this).find('input[type="text"]').val();
-
             var selectedOption = $(this).find('select option:selected').text();
-
             formHtml += `<div style="margin-bottom: 15px;">${fieldName}</div>`;
             formHtml += `<input type="text" class="form-control" value="${selectedOption}" placeholder="Selected Value" style="margin-bottom: 15px;">`;
           });
