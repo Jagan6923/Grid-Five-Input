@@ -2,510 +2,202 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-    <style>
-        .dynamic-form {
-            margin-right: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <style>
+    .dynamic-form {
+      margin-right: 20px;
+    }
 
-        .dynamic-field {
-            margin-top: 20px;
-        }
-
-        /* Make input boxes smaller */
-        input.form-control,
-        select.form-select {
-            width: 250px;
-            /* Adjust the width as needed */
-        }
-
-        /* Custom styles for full-screen background with opacity */
-        body {
-            background: rgba(0, 123, 255, 0.1) !important;
-            /* Adjust color and opacity as needed */
-        }
-
-        .btn-green {
-            background-color: #23d000;
-            border: 0;
-            border-radius: 36px;
-            /* Adjust the border radius for smaller buttons */
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            /* Reduce the font size for smaller buttons */
-            font-weight: 600;
-            outline: 0;
-            padding: 8px 14px;
-            /* Adjust the padding as needed */
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: all .3s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .btn-green:before {
-            background-color: initial;
-            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-            border-radius: 125px;
-            content: "";
-            height: 50%;
-            left: 4%;
-            opacity: .5;
-            position: absolute;
-            top: 0;
-            transition: all .3s;
-            width: 92%;
-        }
-
-        .btn-green:hover {
-            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-            transform: scale(1.05);
-        }
-
-        @media (min-width: 768px) {
-            .btn-green {
-                padding: 8px 30px;
-                /* Adjust the padding as needed */
-                font-size: 16px;
-                /* Increase the font size for larger buttons */
-            }
-        }
-
-        .btn-blue {
-            background-color: #0e00d0;
-            border: 0;
-            border-radius: 36px;
-            /* Adjust the border radius for smaller buttons */
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            /* Reduce the font size for smaller buttons */
-            font-weight: 600;
-            outline: 0;
-            padding: 8px 14px;
-            /* Adjust the padding as needed */
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: all .3s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .btn-blue:before {
-            background-color: initial;
-            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-            border-radius: 125px;
-            content: "";
-            height: 50%;
-            left: 4%;
-            opacity: .5;
-            position: absolute;
-            top: 0;
-            transition: all .3s;
-            width: 92%;
-        }
-
-        .btn-blue:hover {
-            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-            transform: scale(1.05);
-        }
-
-        @media (min-width: 768px) {
-            .btn-blue {
-                padding: 8px 30px;
-                /* Adjust the padding as needed */
-                font-size: 16px;
-                /* Increase the font size for larger buttons */
-            }
-        }
-
-        .btn-pink {
-            background-color: #d00080;
-            border: 0;
-            border-radius: 36px;
-            /* Adjust the border radius for smaller buttons */
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            /* Reduce the font size for smaller buttons */
-            font-weight: 600;
-            outline: 0;
-            padding: 8px 14px;
-            /* Adjust the padding as needed */
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: all .3s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .btn-pink:before {
-            background-color: initial;
-            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-            border-radius: 125px;
-            content: "";
-            height: 50%;
-            left: 4%;
-            opacity: .5;
-            position: absolute;
-            top: 0;
-            transition: all .3s;
-            width: 92%;
-        }
-
-        .btn-pink:hover {
-            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-            transform: scale(1.05);
-        }
-
-        @media (min-width: 768px) {
-            .btn-pink {
-                padding: 8px 30px;
-                /* Adjust the padding as needed */
-                font-size: 16px;
-                /* Increase the font size for larger buttons */
-            }
-        }
-
-        .btn-red {
-            background-color: #d00000;
-            border: 0;
-            border-radius: 36px;
-            /* Adjust the border radius for smaller buttons */
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            /* Reduce the font size for smaller buttons */
-            font-weight: 600;
-            outline: 0;
-            padding: 8px 14px;
-            /* Adjust the padding as needed */
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: all .3s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .btn-red:before {
-            background-color: initial;
-            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-            border-radius: 125px;
-            content: "";
-            height: 50%;
-            left: 4%;
-            opacity: .5;
-            position: absolute;
-            top: 0;
-            transition: all .3s;
-            width: 92%;
-        }
-
-        .btn-red:hover {
-            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-            transform: scale(1.05);
-        }
-
-        @media (min-width: 768px) {
-            .btn-red {
-                padding: 8px 30px;
-                /* Adjust the padding as needed */
-                font-size: 16px;
-                /* Increase the font size for larger buttons */
-            }
-        }
-
-        .button-75 {
-            align-items: center;
-            appearance: none;
-            background-clip: padding-box;
-            background-color: initial;
-            background-image: none;
-            border-style: none;
-            box-sizing: border-box;
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            flex-direction: row;
-            flex-shrink: 0;
-            font-family: Eina01, sans-serif;
-            font-size: 16px;
-            font-weight: 800;
-            justify-content: center;
-            line-height: 24px;
-            margin: 0;
-            min-height: 64px;
-            outline: none;
-            overflow: visible;
-            padding: 19px 26px;
-            pointer-events: auto;
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            text-transform: none;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            vertical-align: middle;
-            width: auto;
-            word-break: keep-all;
-            z-index: 0;
-        }
-
-        @media (min-width: 768px) {
-            .button-75 {
-                padding: 19px 32px;
-            }
-        }
-
-        .button-75:before,
-        .button-75:after {
-            border-radius: 80px;
-        }
-
-        .button-75:before {
-            background-color: rgba(249, 58, 19, .32);
-            content: "";
-            display: block;
-            height: 100%;
-            left: 0;
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: -2;
-        }
-
-        .button-75:after {
-            background-color: initial;
-            background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
-            bottom: 4px;
-            content: "";
-            display: block;
-            left: 4px;
-            overflow: hidden;
-            position: absolute;
-            right: 4px;
-            top: 4px;
-            transition: all 100ms ease-out;
-            z-index: -1;
-        }
-
-        .button-75:hover:not(:disabled):after {
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 0;
-            transition-timing-function: ease-in;
-        }
-
-        .button-75:active:not(:disabled) {
-            color: #ccc;
-        }
-
-        .button-75:active:not(:disabled):after {
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
-            bottom: 4px;
-            left: 4px;
-            right: 4px;
-            top: 4px;
-        }
-
-        .button-75:disabled {
-            cursor: default;
-            opacity: .24;
-        }
+    .dynamic-field {
+      margin-top: 20px;
+    }
 
 
+    input.form-control,
+    select.form-select {
+      width: 250px;
+
+    }
+
+    body {
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #3498db;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: #ffffff;
+    }
 
 
+    .nav-tabs .nav-item .nav-link {
+      color: #0080ff;
+    }
 
-        .button-29 {
-            align-items: center;
-            appearance: none;
-            background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
-            border: 0;
-            border-radius: 6px;
-            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
-            box-sizing: border-box;
-            color: #fff;
-            cursor: pointer;
-            display: inline-flex;
-            font-family: "JetBrains Mono", monospace;
-            height: 48px;
-            justify-content: center;
-            line-height: 1;
-            list-style: none;
-            overflow: hidden;
-            padding-left: 16px;
-            padding-right: 16px;
-            position: relative;
-            text-align: left;
-            text-decoration: none;
-            transition: box-shadow .15s, transform .15s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            white-space: nowrap;
-            will-change: box-shadow, transform;
-            font-size: 18px;
-        }
+    .tab-pane {
+      background-color: #67a7df;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .button-29:focus {
-            box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-        }
+    .grid {
+      background-color: #67a7df;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
 
-        .button-29:hover {
-            box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-            transform: translateY(-2px);
-        }
+    #projectForm {
+      margin-left: 60px;
+    }
 
-        .button-29:active {
-            box-shadow: #3c4fe0 0 3px 7px inset;
-            transform: translateY(2px);
-        }
+    .draggable {
+      cursor: grab;
 
-        .grid {
-            background-color: #87CEEB;
-            width: 100%;
-            height: 430px;
-            position: relative;
-        }
-    </style>
-    <title>Tabs</title>
+    }
+
+    .dragging {
+      opacity: 0.5;
+
+    }
+
+    #projectbutton {
+      margin-left: 20px;
+    }
+
+    #projectForm {
+      margin-top: 10px;
+      margin-left: 70px;
+    }
+
+    .nav-item {
+      margin-left: 50px;
+    }
+  </style>
+  <title>Tabs</title>
 </head>
 
 <body>
-
-    <div class="bg-primary text-white">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active m-3 px-5 fs-5 text-dark" id="formCreationTab" data-bs-toggle="tab"
-                    href="#tabContent1">Form creation Tab</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link m-3 px-5 fs-5 text-dark" id="alignmentTab" data-bs-toggle="tab"
-                    href="#tabContent2">Alignment
-                    Tab</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">Tab 3</a>
-            </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Web components</a>
     </div>
+  </nav>
+  <div>
+    <form id="projectForm" class="mb-3">
+      <input id="searchInput" type="text" class="form-control mb-3 " placeholder="Search...">
+      <input type="text" id="projectName" placeholder="Enter project name">
+      <button type="submit" class="btn btn-primary" id="projectbutton">Submit</button>
+      <span id="successMessage" class="bg-success"></span>
+      <span id="errorMessage" class="bg-danger"></span>
+    </form>
+  </div>
+  <div class="text-white">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active m-3 px-5  text-dark" id="formCreationTab" data-bs-toggle="tab"
+          href="#tabContent1">Form creation Tab</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link m-3 px-5  text-dark" id="alignmentTab" data-bs-toggle="tab" href="#tabContent2">Alignment
+          Tab</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link m-3 px-5  text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">Tab 3</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="mt-5 mx-5 p-2 text-dark">
-        <div class="tab-content" id="formsContainer">
-            <!-- Form 1 -->
-            <div class="tab-pane fade show active" id="tabContent1">
-                <!-- Form 1 content -->
-                <div id="tabContent1Forms">
-                    <!-- Form 1 content -->
-                    <form class="dynamic-form" id="Form1">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="form1-name" class="form-label">Form 1</label>
-                                <input type="text" class="form-control" id="form1-name" placeholder="Form 1">
-                            </div>
-                            <div class="col">
-                                <label for="form1-redirect" class="form-label"> Form 1 Redirect Path</label>
-                                <input type="text" class="form-control" id="form1-redirect" placeholder="Redirect Path">
-                            </div>
-                            <div class="col mt-4">
-                                <button type="button" class="button-29 add-form">+</button>
-                            </div>
-                        </div>
-
-                        <!-- Field 1-->
-                        <div class="dynamic-field">
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="form1-field1" class="form-label"> Form1 Field Name 1</label>
-                                    <input type="text" class="form-control" id="form1-field1"
-                                        placeholder="Form1 Field Name 1">
-                                </div>
-                                <div class="col">
-                                    <label for="form1-fieldType1" class="form-label">Field Types</label>
-                                    <select class="form-select" id="form1-fieldType1">
-                                        <option value="text">Varchar Field</option>
-                                        <option value="text">Number Field</option>
-                                        <option value="text">Password</option>
-                                        <option value="text">Select Box</option>
-                                        <option value="text">Number Field</option>
-                                        <option value="text">Email</option>
-                                        <option value="text">Radio Button</option>
-                                        <option value="text">Calc Field</option>
-                                        <option value="text">Check Box</option>
-                                        <option value="text">Image</option>
-                                        <option value="text">Logo</option>
-                                        <option value="text">Comment Box</option>
-                                        <option value="text">Quantity Box</option>
-                                        <option value="text">Button</option>
-                                        <option value="text">Tables</option>
-                                        <option value="text">Video Field</option>
-                                        <option value="text">File Field</option>
-                                        <option value="text">Audio Field</option>
-                                    </select>
-                                </div>
-                                <div class="col d-flex mt-4">
-                                    <div class="ms-auto">
-                                        <button type="button" class="button-75 add-field">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Button after all forms and fields -->
-                <div class="mt-4">
-                    <button type="button" class="btn btn-pink Submit">Submit</button>
-                    <button type="button" class="btn btn-red Cancel">cancel</button>
-                    <button type="button" class="btn btn-green Reset">Reset</button>
-                    <button type="button" class="btn btn-blue Preview">Preview</button>
-                </div>
-
+  <div class="mt-5 mx-5 p-2 text-dark">
+    <div class="tab-content" id="formsContainer">
+      <div class="tab-pane fade show active" id="tabContent1">
+        <div id="tabContent1Forms">
+          <form class="dynamic-form" id="Form1">
+            <div class="row mb-3">
+              <div class="col">
+                <label for="form1-name" class="form-label">Form 1</label>
+                <input type="text" class="form-control" id="form1-name" placeholder="Form 1">
+              </div>
+              <div class="col">
+                <label for="form1-redirect" class="form-label"> Form 1 Redirect Path</label>
+                <input type="text" class="form-control" id="form1-redirect" placeholder="Redirect Path">
+              </div>
+              <div class="col mt-4">
+                <button type="button" class="btn btn-primary add-form">+</button>
+              </div>
             </div>
 
-            <!-- Alignment Tab -->
-            <div class="tab-pane fade" id="tabContent2">
-                <div class="grid" id="emptyGrid">
+            <div class="dynamic-field">
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="form1-field1" class="form-label"> Form1 Field Name 1</label>
+                  <input type="text" class="form-control" id="form1-field1" placeholder="Form1 Field Name 1">
                 </div>
+                <div class="col">
+                  <label for="form1-fieldType1" class="form-label">Field Types</label>
+                  <select class="form-select" id="form1-fieldType1">
+                    <option value="text">Varchar Field</option>
+                    <option value="text">Number Field</option>
+                    <option value="text">Password</option>
+                    <option value="text">Select Box</option>
+                    <option value="text">Number Field</option>
+                    <option value="text">Email</option>
+                    <option value="text">Radio Button</option>
+                    <option value="text">Calc Field</option>
+                    <option value="text">Check Box</option>
+                    <option value="text">Image</option>
+                    <option value="text">Logo</option>
+                    <option value="text">Comment Box</option>
+                    <option value="text">Quantity Box</option>
+                    <option value="text">Button</option>
+                    <option value="text">Tables</option>
+                    <option value="text">Video Field</option>
+                    <option value="text">File Field</option>
+                    <option value="text">Audio Field</option>
+                  </select>
+                </div>
+                <div class="col d-flex mt-4">
+                  <div class="ms-auto">
+                    <button type="button" class="btn btn-primary add-field">+</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- Empty space for Tab 3 -->
-            <div class="tab-pane fade" id="tabContent3" style="height: 300px;"></div>
+          </form>
         </div>
+        <div>
+          <div class="mt-4">
+            <button type="button" class="btn btn-primary Submit">Submit</button>
+            <button type="button" class="btn btn-danger Cancel">cancel</button>
+            <button type="button" class="btn btn-secondary Reset">Reset</button>
+            <button type="button" class="btn btn-success Preview">Preview</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tabContent2">
+        <div class="grid" id="emptyGrid"></div>
+      </div>
+      <div class="tab-pane fade" id="tabContent3" style="height: 500px;width: 1100px;"></div>
     </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@interactjs/interactjs@1.10.11/dist/interact.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
+  <script>
+    $(document).ready(function () {
 
-            function generateFormHtml(formId) {
-                return `
+      function generateFormHtml(formId) {
+        return `
           <form class="dynamic-form" id="${formId}">
             <div class="row mb-3">
               <div class="col">
@@ -517,7 +209,7 @@
                 <input type="text" class="form-control" id="${formId}-redirect" placeholder="Redirect Path">
               </div>
               <div class="col mt-4">
-                <button type="button" class="button-29 remove-form">-</button>
+                <button type="button" class="btn btn-danger remove-form">-</button>
               </div>
             </div>
 
@@ -553,49 +245,46 @@
                 </div>
                 <div class="col d-flex mt-4">
                   <div class="ms-auto">
-                    <button type="button" class="button-75 add-field">+</button>
+                    <button type="button" class="btn btn-primary add-field">+</button>
                   </div>
                 </div>
               </div>
             </div>
           </form>
         `;
-            }
+      }
 
-            function addForm() {
-                // Find all existing forms
-                var existingForms = $('.dynamic-form');
-                // Start counting from the next available number
-                var formCounter = 1;
-                existingForms.each(function () {
-                    var idNumber = parseInt($(this).attr('id').replace('Form', ''));
-                    formCounter = Math.max(formCounter, idNumber + 1);
-                });
-                var newFormId = 'Form' + formCounter;
-                var newFormHtml = generateFormHtml(newFormId);
-                $('#tabContent1Forms').append(newFormHtml);
-            }
+      function addForm() {
+        var existingForms = $('.dynamic-form');
+        var formCounter = 1;
+        existingForms.each(function () {
+          var idNumber = parseInt($(this).attr('id').replace('Form', ''));
+          formCounter = Math.max(formCounter, idNumber + 1);
+        });
+        var newFormId = 'Form' + formCounter;
+        var newFormHtml = generateFormHtml(newFormId);
+        $('#tabContent1Forms').append(newFormHtml);
+      }
 
-            function removeForm() {
-                $(this).closest(".dynamic-form").remove();
-            }
+      function removeForm() {
+        $(this).closest(".dynamic-form").remove();
+      }
 
-            function addField(formId) {
-                var existingFields = $('#' + formId + ' .dynamic-field').length;
-                var maxFieldNumber = 1;
+      function addField(formId) {
+        var existingFields = $('#' + formId + ' .dynamic-field').length;
+        var maxFieldNumber = 1;
 
-                // Find the maximum field number among existing fields
-                $('#' + formId + ' .dynamic-field').each(function () {
-                    var id = $(this).find('input').attr('id');
-                    var fieldNumber = parseInt(id.split('Field')[1]);
-                    if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
-                        maxFieldNumber = fieldNumber;
-                    }
-                });
+        $('#' + formId + ' .dynamic-field').each(function () {
+          var id = $(this).find('input').attr('id');
+          var fieldNumber = parseInt(id.split('Field')[1]);
+          if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
+            maxFieldNumber = fieldNumber;
+          }
+        });
 
-                var nextFieldNumber = maxFieldNumber + 1;
+        var nextFieldNumber = maxFieldNumber + 1;
 
-                var newField = `
+        var newField = `
           <div class="dynamic-field">
             <div class="row mb-3">
               <div class="col">
@@ -628,79 +317,120 @@
               </div>
               <div class="col d-flex mt-4">
                 <div class="ms-auto">
-                  <button type="button" class="button-75 remove-field">-</button>
+                  <button type="button" class="btn btn-danger remove-field">-</button>
                 </div>
               </div>
             </div>
           </div>`;
 
-                $('#' + formId).append(newField);
+        $('#' + formId).append(newField);
+      }
+
+      function removeField() {
+        $(this).closest(".dynamic-field").remove();
+      }
+      function resetFields(formContainerId) {
+
+        $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
+
+
+        $("#" + formContainerId + " .dynamic-form:first input[type='text']").val('');
+
+
+        $("#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)").remove();
+
+
+        formCounter = 1;
+      }
+
+      $(document).ready(function () {
+        $('#projectForm').submit(function (e) {
+          e.preventDefault();
+          var projectName = $('#projectName').val();
+          $.ajax({
+            type: 'POST',
+            url: '/save_project/',
+            data: {
+              'project_name': projectName,
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+              $('#errorMessage').removeClass('bg-danger').addClass('bg-success').text(response.message);
+              $('#projectName').val('');
+              setTimeout(function () {
+                $('#errorMessage').removeClass('bg-success').text('');
+              }, 2000);
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
             }
-
-            function removeField() {
-                $(this).closest(".dynamic-field").remove();
-            }
-            // Function to reset all input fields within a form container
-            function resetFields(formContainerId) {
-                // Remove all dynamically added forms except the first one
-                $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
-
-                // Reset the input values of the initial form
-                $("#" + formContainerId + " .dynamic-form:first input[type='text']").val('');
-
-                // Remove all dynamically added fields except the first one in each form
-                $("#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)").remove();
-
-                // Reset the form counter to 1
-                formCounter = 1;
-            }
-            $(".Preview").click(function () {
-                // Switch to the Alignment Tab
-                $('a[href="#tabContent2"]').tab('show');
-
-                // Clear existing content in the Alignment Tab
-                $('#emptyGrid').empty();
-
-                // Get data from Form 1 and create labels
-                $('#tabContent1Forms .dynamic-form').each(function () {
-                    var formId = $(this).attr('id');
-                    var formName = $(this).find('input[id$="-name"]').val();
-                    var redirectPath = $(this).find('input[id$="-redirect"]').val();
-                    var fieldName1 = $(this).find('input[id$="-field1"]').val();
-                    var selectedFieldType = $(this).find('select[id$="-fieldType1"] option:selected').text(); // Get selected field type text
-
-                    // Construct HTML for labels
-                    var labelHtml = `<div class="label">${formName}  ${redirectPath}</div>`;
-                    $('#emptyGrid').append(labelHtml);
-
-                    // Append data from Form1 Field Name 1 below the label with space
-                    var fieldDataHtml = `<div style="margin-bottom: 10px;">${fieldName1}</div>`;
-                    $('#emptyGrid').append(fieldDataHtml);
-
-                    // Append selected field type text as an input box with space
-                    var fieldTypeHtml = `<div style="margin-bottom: 10px;"><input type="text" class="form-control" value="${selectedFieldType}" placeholder="selected Value"></div>`;
-                    $('#emptyGrid').append(fieldTypeHtml);
-                });
-            });
-
-
-
-            // Event listener for the reset button
-            $(".Reset").click(function () {
-                resetFields('formsContainer');
-            });
-
-            // Event listeners for adding and removing forms and fields
-            $("#tabContent1").on("click", ".add-form", addForm);
-            $("#formsContainer").on("click", ".remove-form", removeForm);
-            $("#tabContent1").on("click", ".add-field", function () {
-                var formId = $(this).closest('.dynamic-form').attr('id');
-                addField(formId);
-            });
-            $("#tabContent1").on("click", ".remove-field", removeField);
-
+          });
         });
-    </script>
+        $('#projectName').blur(function () {
+          var projectName = $(this).val();
+          $.ajax({
+            type: 'POST',
+            url: '/validate_project_name/',
+            data: {
+              'project_name': projectName,
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+              if (response.exists) {
+                $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Project name already used!');
+              } else {
+                $('#errorMessage').removeClass('bg-danger bg-success').text('');
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+            }
+          });
+        });
+      });
+      $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".dynamic-form").filter(function () {
+          $(this).toggle($(this).attr('id').toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $(".Preview").click(function () {
+        $('a[href="#tabContent2"]').tab('show');
+
+        $('#emptyGrid').empty();
+
+        $('#tabContent1Forms .dynamic-form').each(function () {
+          var formName = $(this).find('input[id$="-name"]').val();
+          var redirectPath = $(this).find('input[id$="-redirect"]').val();
+          var formHtml = '';
+          var labelHtml = `<div style="margin-bottom: 15px;" class="label label-large">${formName} </div>`;
+          formHtml += labelHtml;
+
+          $(this).find('.dynamic-field').each(function () {
+            var fieldName = $(this).find('input[type="text"]').val();
+            var selectedOption = $(this).find('select option:selected').text();
+            formHtml += `<div style="margin-bottom: 15px;">${fieldName}</div>`;
+            formHtml += `<input type="text" class="form-control" value="${selectedOption}" placeholder="Selected Value" style="margin-bottom: 15px;">`;
+          });
+
+          $('#emptyGrid').append(formHtml);
+        });
+      });
+
+      $(".Reset").click(function () {
+        resetFields('formsContainer');
+      });
+
+      $("#tabContent1").on("click", ".add-form", addForm);
+      $("#formsContainer").on("click", ".remove-form", removeForm);
+      $("#tabContent1").on("click", ".add-field", function () {
+        var formId = $(this).closest('.dynamic-form').attr('id');
+        addField(formId);
+      });
+      $("#tabContent1").on("click", ".remove-field", removeField);
+
+    });
+  </script>
 </body>
 
 </html>
