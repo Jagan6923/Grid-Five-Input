@@ -68,11 +68,9 @@
   <div>
     <div class="container mt-3">
       <form id="projectForm" class="mb-3">
-        <input id="searchInput" type="text" class="form-control mb-3 " placeholder="Search...">
-        <input type="text" id="projectName" placeholder="Enter project name">
+        <input id="projectName" type="text" placeholder="Enter project name">
         <button type="submit">Submit</button>
-        <span id="successMessage" class="bg-success"></span>
-        <span id="errorMessage" class="bg-danger"></span>
+        <span id="errorMessage"></span>
       </form>
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
@@ -334,10 +332,18 @@
     document.getElementById("submitBtn")
       .addEventListener("click", function () { alert("Thank you for submitting!"); });
 
+    // script.js
     $(document).ready(function () {
       $('#projectForm').submit(function (e) {
         e.preventDefault();
         var projectName = $('#projectName').val();
+
+        // Check if projectName is empty
+        if (!projectName.trim()) {
+          $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Please enter a project name');
+          return; // Stop form submission
+        }
+
         $.ajax({
           type: 'POST',
           url: '/save_project/',
@@ -346,39 +352,25 @@
             'csrfmiddlewaretoken': '{{ csrf_token }}'
           },
           success: function (response) {
-            $('#errorMessage').removeClass('bg-danger').addClass('bg-success').text(response.message);
+            if (response.success) {
+              $('#errorMessage').removeClass('bg-danger').addClass('bg-success').text(response.message);
+            } else {
+              $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text(response.message);
+            }
             $('#projectName').val('');
             setTimeout(function () {
-              $('#errorMessage').removeClass('bg-success').text('');
+              $('#errorMessage').removeClass('bg-success bg-danger').text('');
             }, 2000);
           },
           error: function (xhr, status, error) {
             console.error(xhr.responseText);
-          }
-        });
-      });
-      $('#projectName').blur(function () {
-        var projectName = $(this).val();
-        $.ajax({
-          type: 'POST',
-          url: '/validate_project_name/',
-          data: {
-            'project_name': projectName,
-            'csrfmiddlewaretoken': '{{ csrf_token }}'
-          },
-          success: function (response) {
-            if (response.exists) {
-              $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Project name already used!');
-            } else {
-              $('#errorMessage').removeClass('bg-danger bg-success').text('');
-            }
-          },
-          error: function (xhr, status, error) {
-            console.error(xhr.responseText);
+            $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Project name already used!!');
           }
         });
       });
     });
+
+
     $(document).ready(function () {
       // Function to add draggable element to tab 2 grid
       function addDraggableToGrid(element) {

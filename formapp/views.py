@@ -1,53 +1,25 @@
 # views.py in formapp app
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Project,DraggableInput
+from .models import Project
 
 def index(request):
     return render(request, 'index.html')
 
+from django.http import JsonResponse
+
 def save_project(request):
     if request.method == 'POST':
         project_name = request.POST.get('project_name')
+
+        # Check if project name is empty
+        if not project_name.strip():
+            return JsonResponse({'success': False, 'message': 'Please enter a project name'}, status=400)
+
         if Project.objects.filter(name=project_name).exists():
-            return JsonResponse({'message': 'Name already used'}, status=400)
+            return JsonResponse({'success': False, 'message': 'Project name already used'}, status=400)
         else:
             Project.objects.create(name=project_name)
-            return JsonResponse({'message': 'Project name saved successfully!!'})
-    return JsonResponse({'message': 'Invalid request'}, status=400)
+            return JsonResponse({'success': True, 'message': 'Project name saved successfully!!'})
 
-def validate_project_name(request):
-    if request.method == 'POST':
-        project_name = request.POST.get('project_name')
-        exists = Project.objects.filter(name=project_name).exists()
-        return JsonResponse({'exists': exists})
-    return JsonResponse({'exists': False})
-
-def save_draggable_input(request):
-    if request.method == 'POST':
-        data = request.POST.getlist('data[]')
-        x_axis = request.POST.getlist('x_axis[]')
-        y_axis = request.POST.getlist('y_axis[]')
-        input_field_ids = request.POST.getlist('input_field_id[]')
-        label_names = request.POST.getlist('label_name[]')
-        label_ids = request.POST.getlist('label_id[]')
-        label_x_axis = request.POST.getlist('label_x_axis[]')  
-        label_y_axis = request.POST.getlist('label_y_axis[]')  
-
-        
-        for i in range(len(data)):
-            draggable_input = DraggableInput.objects.create(
-                data=data[i],
-                x_axis=x_axis[i],
-                y_axis=y_axis[i],
-                input_field_id=input_field_ids[i],
-                label_name=label_names[i],
-                label_id=label_ids[i],
-                label_x_axis=label_x_axis[i],  
-                label_y_axis=label_y_axis[i]   
-            )
-            draggable_input.save()
-
-        return JsonResponse({'message': 'Data submitted successfully!'})
-
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
