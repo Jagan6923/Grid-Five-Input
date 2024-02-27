@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -381,54 +380,41 @@
       });
     });
     $(document).ready(function () {
-    // Initialize draggable functionality for elements in tabContent2
-    $("#emptyGrid").sortable({
-        containment: "parent" // Restrict drag and drop within tabContent2
-    });
-
-    // Function to make elements draggable
-    $(".draggable").draggable({
-        containment: "#emptyGrid" // Restrict drag and drop within the grid
-    });
-});
-
-// Function to add draggable element to tab 2 grid
-function addDraggableToGrid(element) {
-    if (previewMode) {
-        $("#emptyGrid").append(element);
-        $(".draggable").draggable({
+      // Function to add draggable element to tab 2 grid
+      function addDraggableToGrid(element) {
+        if (previewMode) {
+          $("#emptyGrid").append(element);
+          $("#emptyGrid .draggable").draggable({
             containment: "#emptyGrid" // Restrict drag and drop within the grid
-        });
-    }
-}
+          });
+        }
+      }
 
-$("#preview").on("click", function () {
-    previewMode = true;
-    $("#emptyGrid").empty(); // Clear existing content
-    // Add input field values from tab 1 to tab 2 grid
-    $(".dynamic-form").each(function () {
-        // Add field names as draggable labels
-        $(this).find('.form-control').each(function () {
+      $("#preview").on("click", function () {
+        previewMode = true;
+        $("#emptyGrid").empty(); // Clear existing content
+        // Add input field values from tab 1 to tab 2 grid
+        $(".dynamic-form").each(function () {
+          // Add field names as draggable labels
+          $(this).find('.form-control').each(function () {
             var fieldName = $(this).val().trim();
             if (fieldName !== "") {
-                addDraggableToGrid(`<div class="draggable">${fieldName}</div>`);
+              addDraggableToGrid(`<div class="draggable">${fieldName}</div>`);
             }
-        });
-        // Add selected item from selection box as draggable input field
-        var selectedOption = $(this).find('.form-select option:selected').text().trim();
-        if (selectedOption !== "") {
+          });
+          // Add selected item from selection box as draggable input field
+          var selectedOption = $(this).find('.form-select option:selected').text().trim();
+          if (selectedOption !== "") {
             // Modified to create a typeable input field
             addDraggableToGrid(`<input type="text" class="draggable form-control typeable" placeholder="${selectedOption}">`);
-        }
+          }
+        });
+        $('a[href="#tabContent2"]').tab('show'); S
+      });
     });
-    $('a[href="#tabContent2"]').tab('show');
+  
 
-});
 
-// Allow typeable input fields to be edited
-$(document).on("click", ".typeable", function () {
-    $(this).prop("readonly", false);
-});
 
   </script>
 </body>
