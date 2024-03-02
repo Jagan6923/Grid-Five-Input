@@ -15,61 +15,78 @@
             margin-top: 20px;
         }
 
+        /* Make input boxes smaller */
         input.form-control,
         select.form-select {
             width: 250px;
-
+            /* Adjust the width as needed */
         }
 
+        /* Custom styles for full-screen background with opacity */
         body {
             background: rgba(0, 123, 255, 0.1) !important;
-
+            /* Adjust color and opacity as needed */
         }
 
 
+
+        /* CSS Grid styles */
         .grid-container {
             display: grid;
             width: 100%;
+            /* Adjust the width as needed */
             height: 450px;
+            /* Adjust the height as needed */
             background: rgba(0, 123, 255, 0.1);
             position: relative;
+            /* Position relative for absolute positioning of draggable label */
         }
 
         .grid-item {
             border: 1px solid #2247ad;
+            /* Border for visual separation */
             padding: 20px;
+            /* Padding for the grid item */
         }
 
         .draggable-label {
             position: absolute;
+            /* Make the label position absolute for dragging */
             padding: 10px;
+            /* Padding for the label */
+
             cursor: move;
+            /* Change cursor to indicate draggable */
         }
 
-
+        /* CSS to position labels within the grid item */
         .form1-values {
             position: absolute;
+
+
             top: 10px;
+            /* Adjust as needed */
             left: 10px;
+            /* Adjust as needed */
         }
 
         .form-values label {
             font-size: 18px;
-
+            /* Adjust the font size as needed */
         }
 
         .form1-fieldname {
             position: absolute;
             top: 50px;
-
+            /* Adjust as needed */
             left: 10px;
-
+            /* Adjust as needed */
         }
 
         body {
-            background: #2247ad;
+            background: #8C52FF;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 200vh;
+            height: 100vh;
             margin: 0;
         }
 
@@ -82,7 +99,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            max-height: 800px;
         }
 
 
@@ -96,7 +112,7 @@
         }
 
         .tab3button {
-            background: #2247ad;
+            background: #debff4;
             color: white;
             padding: 10px;
             border: none;
@@ -108,7 +124,7 @@
         }
 
         .tab3button:hover {
-            background: #2247adbe;
+            background: #8b48d7;
         }
 
         #temp-div p {
@@ -134,8 +150,6 @@
             white-space: nowrap;
             display: flex;
             justify-content: space-between;
-            background-color: #2247adbe;
-            border-radius: 20px;
         }
 
         .hourly-item {
@@ -145,7 +159,7 @@
             flex-direction: column;
             align-items: center;
             margin-right: 10px;
-            color: rgb(0, 0, 0);
+            color: white;
         }
 
         .hourly-item img {
@@ -157,10 +171,6 @@
         #hourly-heading {
             color: #fff;
             margin-top: 10px;
-        }
-
-        #weather-container {
-            align-items: center;
         }
     </style>
     <title>Tabs</title>
@@ -180,7 +190,7 @@
                     Tab</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">API</a>
+                <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">Tab 3</a>
             </li>
         </ul>
     </div>
@@ -271,7 +281,7 @@
                 <div id="weather-container">
                     <h2>Weather App</h2>
                     <input type="text" id="city" class="tab3input" placeholder="Enter city">
-                    <button onclick="getWeather()" class="tab3button">Submit</button>
+                    <button onclick="getWeather()" class="tab3button">Search</button>
 
                     <img id="weather-icon" alt="Weather Icon">
 
@@ -282,8 +292,10 @@
                     <div id="hourly-forecast"></div>
                 </div>
             </div>
+
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -636,6 +648,7 @@
                 weatherInfoDiv.innerHTML = weatherHtml;
                 weatherIcon.src = iconUrl;
                 weatherIcon.alt = description;
+
                 showImage();
             }
         }
@@ -668,6 +681,9 @@
             const weatherIcon = document.getElementById('weather-icon');
             weatherIcon.style.display = 'block'; // Make the image visible once it's loaded
         }
+
+
+
 
     </script>
 </body>
