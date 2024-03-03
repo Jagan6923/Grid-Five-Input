@@ -1,174 +1,214 @@
 <!-- Only drag labels and cant drag the input fields -->
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <style>
+      .dynamic-form {
+        margin-right: 20px;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <style>
-    .dynamic-form {
-      margin-right: 20px;
-    }
+      .dynamic-field {
+        margin-top: 20px;
+      }
 
-    .dynamic-field {
-      margin-top: 20px;
-    }
+      /* Make input boxes smaller */
+      input.form-control,
+      select.form-select {
+        width: 250px;
+        /* Adjust the width as needed */
+      }
 
-    /* Make input boxes smaller */
-    input.form-control,
-    select.form-select {
-      width: 250px;
-      /* Adjust the width as needed */
-    }
+      /* Custom styles for full-screen background with opacity */
+      body {
+        background: rgba(0, 123, 255, 0.1) !important;
+        /* Adjust color and opacity as needed */
+      }
 
-    /* Custom styles for full-screen background with opacity */
-    body {
-      background: rgba(0, 123, 255, 0.1) !important;
-      /* Adjust color and opacity as needed */
-    }
+      .grid {
+        background-color: #87ceeb;
+        width: 100%;
+        min-height: 450px;
+        position: relative;
+      }
 
-    .grid {
-      background-color: #87CEEB;
-      width: 100%;
-      min-height: 450px;
-      position: relative;
-    }
+      .label-large {
+        font-size: 18px;
+      }
 
-    .label-large {
-      font-size: 18px;
-    }
+      #emptyGrid {
+        width: 1480px;
+        height: 100%;
+      }
 
-    #emptyGrid {
-      width: 1480px;
-      height: 100%;
-    }
+      .draggable {
+        cursor: pointer;
+      }
 
-    .draggable {
-      cursor: pointer;
-    }
+      .input {
+        width: 10px;
+      }
+    </style>
+    <title>Tabs</title>
+  </head>
 
-    .input{
-      width: 10px;
-    }
-  </style>
-  <title>Tabs</title>
-</head>
+  <body>
+    <div class="bg-primary text-white">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            class="nav-link active m-3 px-5 fs-5 text-dark"
+            id="formCreationTab"
+            data-bs-toggle="tab"
+            href="#tabContent1"
+            >Form creation Tab</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link m-3 px-5 fs-5 text-dark"
+            id="alignmentTab"
+            data-bs-toggle="tab"
+            href="#tabContent2"
+            >Alignment Tab</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link m-3 px-5 fs-5 text-dark"
+            id="tab3"
+            data-bs-toggle="tab"
+            href="#tabContent3"
+            >Tab 3</a
+          >
+        </li>
+      </ul>
+    </div>
 
-<body>
-
-  <div class="bg-primary text-white">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active m-3 px-5 fs-5 text-dark" id="formCreationTab" data-bs-toggle="tab"
-          href="#tabContent1">Form creation Tab</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link m-3 px-5 fs-5 text-dark" id="alignmentTab" data-bs-toggle="tab" href="#tabContent2">Alignment
-          Tab</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">Tab 3</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="mt-5 mx-5 p-2 text-dark">
-    <div class="tab-content" id="formsContainer">
-      <!-- Form 1 -->
-      <div class="tab-pane fade show active" id="tabContent1">
-        <!-- Form 1 content -->
-        <div id="tabContent1Forms">
+    <div class="mt-5 mx-5 p-2 text-dark">
+      <div class="tab-content" id="formsContainer">
+        <!-- Form 1 -->
+        <div class="tab-pane fade show active" id="tabContent1">
           <!-- Form 1 content -->
-          <form class="dynamic-form" id="Form1">
-            <div class="row mb-3">
-              <div class="col">
-                <label for="form1-name" class="form-label">Form 1</label>
-                <input type="text" class="form-control" id="form1-name" placeholder="Form 1">
-              </div>
-              <div class="col">
-                <label for="form1-redirect" class="form-label"> Form 1 Redirect Path</label>
-                <input type="text" class="form-control" id="form1-redirect" placeholder="Redirect Path">
-              </div>
-              <div class="col mt-4">
-                <button type="button" class="button-29 add-form">+</button>
-              </div>
-            </div>
-
-            <!-- Field 1-->
-            <div class="dynamic-field">
+          <div id="tabContent1Forms">
+            <!-- Form 1 content -->
+            <form class="dynamic-form" id="Form1">
               <div class="row mb-3">
                 <div class="col">
-                  <label for="form1-field1" class="form-label"> Form1 Field Name 1</label>
-                  <input type="text" class="form-control" id="form1-field1" placeholder="Form1 Field Name 1">
+                  <label for="form1-name" class="form-label">Form 1</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="form1-name"
+                    placeholder="Form 1"
+                  />
                 </div>
                 <div class="col">
-                  <label for="form1-fieldType1" class="form-label">Field Types</label>
-                  <select class="form-select" id="form1-fieldType1">
-                    <option value="text">Varchar Field</option>
-                    <option value="text">Number Field</option>
-                    <option value="text">Password</option>
-                    <option value="text">Select Box</option>
-                    <option value="text">Number Field</option>
-                    <option value="text">Email</option>
-                    <option value="text">Radio Button</option>
-                    <option value="text">Calc Field</option>
-                    <option value="text">Check Box</option>
-                    <option value="text">Image</option>
-                    <option value="text">Logo</option>
-                    <option value="text">Comment Box</option>
-                    <option value="text">Quantity Box</option>
-                    <option value="text">Button</option>
-                    <option value="text">Tables</option>
-                    <option value="text">Video Field</option>
-                    <option value="text">File Field</option>
-                    <option value="text">Audio Field</option>
-                  </select>
+                  <label for="form1-redirect" class="form-label">
+                    Form 1 Redirect Path</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="form1-redirect"
+                    placeholder="Redirect Path"
+                  />
                 </div>
-                <div class="col d-flex mt-4">
-                  <div class="ms-auto">
-                    <button type="button" class="button-75 add-field">+</button>
+                <div class="col mt-4">
+                  <button type="button" class="button-29 add-form">+</button>
+                </div>
+              </div>
+
+              <!-- Field 1-->
+              <div class="dynamic-field">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="form1-field1" class="form-label">
+                      Form1 Field Name 1</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="form1-field1"
+                      placeholder="Form1 Field Name 1"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="form1-fieldType1" class="form-label"
+                      >Field Types</label
+                    >
+                    <select class="form-select" id="form1-fieldType1">
+                      <option value="text">Varchar Field</option>
+                      <option value="text">Number Field</option>
+                      <option value="text">Password</option>
+                      <option value="text">Select Box</option>
+                      <option value="text">Number Field</option>
+                      <option value="text">Email</option>
+                      <option value="text">Radio Button</option>
+                      <option value="text">Calc Field</option>
+                      <option value="text">Check Box</option>
+                      <option value="text">Image</option>
+                      <option value="text">Logo</option>
+                      <option value="text">Comment Box</option>
+                      <option value="text">Quantity Box</option>
+                      <option value="text">Button</option>
+                      <option value="text">Tables</option>
+                      <option value="text">Video Field</option>
+                      <option value="text">File Field</option>
+                      <option value="text">Audio Field</option>
+                    </select>
+                  </div>
+                  <div class="col d-flex mt-4">
+                    <div class="ms-auto">
+                      <button type="button" class="button-75 add-field">
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+
+          <!-- Button after all forms and fields -->
+          <div class="mt-4">
+            <button type="button" class="btn btn-primary Submit">Submit</button>
+            <button type="button" class="btn btn-danger Cancel">cancel</button>
+            <button type="button" class="btn btn-secondary Reset">Reset</button>
+            <button type="button" class="btn btn-success Preview">
+              Preview
+            </button>
+          </div>
         </div>
 
-        <!-- Button after all forms and fields -->
-        <div class="mt-4">
-          <button type="button" class="btn btn-primary Submit">Submit</button>
-          <button type="button" class="btn btn-danger Cancel">cancel</button>
-          <button type="button" class="btn btn-secondary Reset">Reset</button>
-          <button type="button" class="btn btn-success Preview">Preview</button>
+        <!-- Alignment Tab -->
+        <div class="tab-pane fade" id="tabContent2">
+          <div class="grid" id="emptyGrid"></div>
         </div>
-
+        <!-- Empty space for Tab 3 -->
+        <div class="tab-pane fade" id="tabContent3" style="height: 300px"></div>
       </div>
-
-      <!-- Alignment Tab -->
-      <div class="tab-pane fade" id="tabContent2">
-        <div class="grid" id="emptyGrid">
-
-        </div>
-      </div>
-      <!-- Empty space for Tab 3 -->
-      <div class="tab-pane fade" id="tabContent3" style="height: 300px;"></div>
     </div>
-  </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-  <script>
-    $(document).ready(function () {
-
-      function generateFormHtml(formId) {
-        return `
+    <script>
+      $(document).ready(function () {
+        function generateFormHtml(formId) {
+          return `
           <form class="dynamic-form" id="${formId}">
             <div class="row mb-3">
               <div class="col">
@@ -223,42 +263,42 @@
             </div>
           </form>
         `;
-      }
+        }
 
-      function addForm() {
-        // Find all existing forms
-        var existingForms = $('.dynamic-form');
-        // Start counting from the next available number
-        var formCounter = 1;
-        existingForms.each(function () {
-          var idNumber = parseInt($(this).attr('id').replace('Form', ''));
-          formCounter = Math.max(formCounter, idNumber + 1);
-        });
-        var newFormId = 'Form' + formCounter;
-        var newFormHtml = generateFormHtml(newFormId);
-        $('#tabContent1Forms').append(newFormHtml);
-      }
+        function addForm() {
+          // Find all existing forms
+          var existingForms = $(".dynamic-form");
+          // Start counting from the next available number
+          var formCounter = 1;
+          existingForms.each(function () {
+            var idNumber = parseInt($(this).attr("id").replace("Form", ""));
+            formCounter = Math.max(formCounter, idNumber + 1);
+          });
+          var newFormId = "Form" + formCounter;
+          var newFormHtml = generateFormHtml(newFormId);
+          $("#tabContent1Forms").append(newFormHtml);
+        }
 
-      function removeForm() {
-        $(this).closest(".dynamic-form").remove();
-      }
+        function removeForm() {
+          $(this).closest(".dynamic-form").remove();
+        }
 
-      function addField(formId) {
-        var existingFields = $('#' + formId + ' .dynamic-field').length;
-        var maxFieldNumber = 1;
+        function addField(formId) {
+          var existingFields = $("#" + formId + " .dynamic-field").length;
+          var maxFieldNumber = 1;
 
-        // Find the maximum field number among existing fields
-        $('#' + formId + ' .dynamic-field').each(function () {
-          var id = $(this).find('input').attr('id');
-          var fieldNumber = parseInt(id.split('Field')[1]);
-          if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
-            maxFieldNumber = fieldNumber;
-          }
-        });
+          // Find the maximum field number among existing fields
+          $("#" + formId + " .dynamic-field").each(function () {
+            var id = $(this).find("input").attr("id");
+            var fieldNumber = parseInt(id.split("Field")[1]);
+            if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
+              maxFieldNumber = fieldNumber;
+            }
+          });
 
-        var nextFieldNumber = maxFieldNumber + 1;
+          var nextFieldNumber = maxFieldNumber + 1;
 
-        var newField = `
+          var newField = `
           <div class="dynamic-field">
             <div class="row mb-3">
               <div class="col">
@@ -297,155 +337,155 @@
             </div>
           </div>`;
 
-        $('#' + formId).append(newField);
-      }
+          $("#" + formId).append(newField);
+        }
 
-      function removeField() {
-        $(this).closest(".dynamic-field").remove();
-      }
-      // Function to reset all input fields within a form container
-      function resetFields(formContainerId) {
-        // Remove all dynamically added forms except the first one
-        $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
+        function removeField() {
+          $(this).closest(".dynamic-field").remove();
+        }
+        // Function to reset all input fields within a form container
+        function resetFields(formContainerId) {
+          // Remove all dynamically added forms except the first one
+          $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
 
-        // Reset the input values of the initial form
-        $("#" + formContainerId + " .dynamic-form:first input[type='text']").val('');
+          // Reset the input values of the initial form
+          $(
+            "#" + formContainerId + " .dynamic-form:first input[type='text']"
+          ).val("");
 
-        // Remove all dynamically added fields except the first one in each form
-        $("#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)").remove();
+          // Remove all dynamically added fields except the first one in each form
+          $(
+            "#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)"
+          ).remove();
 
-        // Reset the form counter to 1
-        formCounter = 1;
-      }
-      // Event listener for the reset button
-      $(".Reset").click(function () {
-        resetFields('formsContainer');
+          // Reset the form counter to 1
+          formCounter = 1;
+        }
+        // Event listener for the reset button
+        $(".Reset").click(function () {
+          resetFields("formsContainer");
+        });
+
+        // Event listeners for adding and removing forms and fields
+        $("#tabContent1").on("click", ".add-form", addForm);
+        $("#formsContainer").on("click", ".remove-form", removeForm);
+        $("#tabContent1").on("click", ".add-field", function () {
+          var formId = $(this).closest(".dynamic-form").attr("id");
+          addField(formId);
+        });
+        $("#tabContent1").on("click", ".remove-field", removeField);
       });
-
-      // Event listeners for adding and removing forms and fields
-      $("#tabContent1").on("click", ".add-form", addForm);
-      $("#formsContainer").on("click", ".remove-form", removeForm);
-      $("#tabContent1").on("click", ".add-field", function () {
-        var formId = $(this).closest('.dynamic-form').attr('id');
-        addField(formId);
-      });
-      $("#tabContent1").on("click", ".remove-field", removeField);
-
-    });
-    $(document).ready(function () {
-
-      function generateLabel(id, text) {
-        return `<label id="${id}" class="draggable ui-widget-content">${text}</label>`;
-      }
-
-      function generateInput(id, placeholder) {
-        return `<input type="text" id="${id}" class="draggable input ui-widget-content" placeholder="${placeholder}">`;
-      }
-
-      function addForm() {
-        var existingForms = $('.dynamic-form').length;
-        var newFormId = 'Form' + (existingForms + 1);
-        var newFormHtml = generateFormHtml(newFormId);
-        $('#tabContent1Forms').append(newFormHtml);
-      }
-
       $(document).ready(function () {
-
         function generateLabel(id, text) {
           return `<label id="${id}" class="draggable ui-widget-content">${text}</label>`;
         }
 
         function generateInput(id, placeholder) {
-          return `<input type="text" id="${id}" class="draggable ui-widget-content" placeholder="${placeholder}">`;
+          return `<input type="text" id="${id}" class="draggable input ui-widget-content" placeholder="${placeholder}">`;
         }
 
         function addForm() {
-          var existingForms = $('.dynamic-form').length;
-          var newFormId = 'Form' + (existingForms + 1);
+          var existingForms = $(".dynamic-form").length;
+          var newFormId = "Form" + (existingForms + 1);
           var newFormHtml = generateFormHtml(newFormId);
-          $('#tabContent1Forms').append(newFormHtml);
+          $("#tabContent1Forms").append(newFormHtml);
         }
 
-      });
-    });
-    $(document).ready(function () {
-      // Function to generate label HTML
-      function generateLabel(text) {
-        return `<label class="draggable ui-widget-content">${text}</label>`;
-      }
+        $(document).ready(function () {
+          function generateLabel(id, text) {
+            return `<label id="${id}" class="draggable ui-widget-content">${text}</label>`;
+          }
 
-      // Function to generate input HTML within a draggable div
-      function generateInput(text) {
-        return `
+          function generateInput(id, placeholder) {
+            return `<input type="text" id="${id}" class="draggable ui-widget-content" placeholder="${placeholder}">`;
+          }
+
+          function addForm() {
+            var existingForms = $(".dynamic-form").length;
+            var newFormId = "Form" + (existingForms + 1);
+            var newFormHtml = generateFormHtml(newFormId);
+            $("#tabContent1Forms").append(newFormHtml);
+          }
+        });
+      });
+      $(document).ready(function () {
+        // Function to generate label HTML
+        function generateLabel(text) {
+          return `<label class="draggable ui-widget-content">${text}</label>`;
+        }
+
+        // Function to generate input HTML within a draggable div
+        function generateInput(text) {
+          return `
             <div class="draggable-wrapper">
                 <input type="text" class="draggable ui-widget-content" value="${text}" readonly>
             </div>`;
-      }
+        }
 
-      // Function to handle preview button click event
-      $(".Preview").click(function () {
-        // Hide the first tab content and show the second tab content
-        $("#tabContent1").removeClass("show active");
-        $("#tabContent2").addClass("show active");
+        // Function to handle preview button click event
+        $(".Preview").click(function () {
+          // Hide the first tab content and show the second tab content
+          $("#tabContent1").removeClass("show active");
+          $("#tabContent2").addClass("show active");
 
-        // Clear the previous content of the grid
-        $("#emptyGrid").empty();
+          // Clear the previous content of the grid
+          $("#emptyGrid").empty();
 
-        // Iterate over each form
-        $(".dynamic-form").each(function () {
-          var formContent = "";
+          // Iterate over each form
+          $(".dynamic-form").each(function () {
+            var formContent = "";
 
-          // Get the form name and add it as a label
-          var formName = $(this).find(".form-control:first").val();
-          if (formName) {
-            formContent += generateLabel(formName);
-          }
-
-          // Iterate over each field in the form
-          $(this).find(".dynamic-field").each(function () {
-            var fieldName = $(this).find(".form-control:first").val();
-            if (fieldName) {
-              formContent += generateLabel(fieldName);
+            // Get the form name and add it as a label
+            var formName = $(this).find(".form-control:first").val();
+            if (formName) {
+              formContent += generateLabel(formName);
             }
 
-            var fieldType = $(this).find("select").val();
-            if (fieldType) {
-              formContent += generateInput(fieldType);
-            }
+            // Iterate over each field in the form
+            $(this)
+              .find(".dynamic-field")
+              .each(function () {
+                var fieldName = $(this).find(".form-control:first").val();
+                if (fieldName) {
+                  formContent += generateLabel(fieldName);
+                }
+
+                var fieldType = $(this).find("select").val();
+                if (fieldType) {
+                  formContent += generateInput(fieldType);
+                }
+              });
+
+            // Append the form content to the grid
+            $("#emptyGrid").append(formContent);
           });
 
-          // Append the form content to the grid
-          $("#emptyGrid").append(formContent);
+          // Make all elements in the second tab draggable
+          $(".draggable").draggable({
+            containment: "#emptyGrid", // Restrict dragging within the container
+            scroll: false,
+          });
+
+          // Make draggable only the wrapper divs containing input fields
+          $(".draggable-wrapper").draggable({
+            axis: "y", // Restrict dragging to vertical axis
+            containment: "#emptyGrid", // Restrict dragging within the container
+            scroll: false,
+          });
+
+          // Make input fields editable on click
+          $("input[type='text']").on("click", function () {
+            $(this).prop("readonly", false);
+          });
+
+          // Disable input fields on blur
+          $("input[type='text']").on("blur", function () {
+            $(this).prop("readonly", true);
+          });
         });
 
-        // Make all elements in the second tab draggable
-        $(".draggable").draggable({
-          containment: "#emptyGrid", // Restrict dragging within the container
-          scroll: false
-        });
-
-        // Make draggable only the wrapper divs containing input fields
-        $(".draggable-wrapper").draggable({
-          axis: "y", // Restrict dragging to vertical axis
-          containment: "#emptyGrid", // Restrict dragging within the container
-          scroll: false
-        });
-
-        // Make input fields editable on click
-        $("input[type='text']").on("click", function () {
-          $(this).prop("readonly", false);
-        });
-
-        // Disable input fields on blur
-        $("input[type='text']").on("blur", function () {
-          $(this).prop("readonly", true);
-        });
+        // Rest of your existing code...
       });
-
-      // Rest of your existing code...
-    });
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
