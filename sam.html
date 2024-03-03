@@ -1,3 +1,4 @@
+<!-- Trying to get the contents of a link in tab 3 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,7 +171,7 @@
           <button type="button" class="btn btn-primary" id="submitUrlBtn">Submit</button>
           <div class="mt-3">
             <label for="contentDisplay" class="form-label">Content:</label>
-            <textarea class="form-control" id="contentDisplay" rows="5" readonly></textarea>
+            <textarea class="form-control" id="contentDisplay" rows="10" readonly></textarea>
           </div>
         </div>
       </div>
@@ -438,9 +439,6 @@
     });
 
     // Allow typeable input fields to be edited
-    $(document).on("click", ".typeable", function () {
-      $(this).prop("readonly", false);
-    });
     $(document).ready(function () {
       $('#submitUrlBtn').click(function () {
         var url = $('#urlInput').val();
@@ -449,7 +447,7 @@
             url: url,
             type: 'GET',
             success: function (data) {
-              $('#contentDisplay').val(data);
+              $('#contentDisplay').val(JSON.stringify(data, null, 2)); // Indentation of 2 spaces
             },
             error: function () {
               $('#contentDisplay').val('Error: Failed to fetch content from the provided URL.');
