@@ -162,6 +162,7 @@
         <div class="grid-container">
           <div class="grid-item"></div>
         </div>
+        <button type="submit" class="btn btn-primary mb-3" id="gridsubmitButton">Submit</button>
       </div>
       <div class="tab-pane fade" id="tabContent3" style="height: 300px"></div>
     </div>
@@ -441,12 +442,58 @@
                 .text();
               if (selectedFieldType !== "") {
                 // Create input for selected value
+                var inputField = '';
+                if (selectedFieldType !== "") {
+                  // Create input for selected value
+                  var inputField = '';
+                  if (selectedFieldType === "Varchar Field") {
+                    inputField = '<input type="text" class="form-control" placeholder="Varchar Field">';
+                  } else if (selectedFieldType === "Number Field") {
+                    inputField = '<input type="number" class="form-control" placeholder="Number Field">';
+                  } else if (selectedFieldType === "Password") {
+                    inputField = '<input type="password" class="form-control" placeholder="Password">';
+                  } else if (selectedFieldType === "Select Box") {
+                    inputField = '<select class="form-select"><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>';
+                  } else if (selectedFieldType === "Email") {
+                    inputField = '<input type="email" class="form-control" placeholder="Email">';
+                  } else if (selectedFieldType === "Radio Button") {
+                    // Option 1
+                    inputField += '<input type="radio" name="' + formId + '" value="Yes"> Yes<br>';
+
+                    // Option 2
+                    inputField += '<input type="radio" name="' + formId + '" value="No">  No<br>';
+                  }
+                  else if (selectedFieldType === "Check Box") {
+                    var checkboxOptions = ["Option 1", "Option 2"]; // Add more options as needed
+                    var checkboxHtml = '';
+                    checkboxOptions.forEach(function (option) {
+                      checkboxHtml += '<input type="checkbox" name="' + formId + '" value="' + option + '">' + option + '<br>';
+                    });
+                    inputField = checkboxHtml;
+                  } else if (selectedFieldType === "Image") {
+                    inputField = '<input type="file" accept="image/*">';
+                  } else if (selectedFieldType === "Logo") {
+                    inputField = '<input type="file" accept="image/*">';
+                  } else if (selectedFieldType === "Comment Box") {
+                    inputField = '<textarea class="form-control" rows="2" placeholder="Comment Box"></textarea>';
+                  } else if (selectedFieldType === "Quantity Box") {
+                    inputField = '<input type="number" class="form-control" placeholder="Quantity Box">';
+                  } else if (selectedFieldType === "Button") {
+                    inputField = '<button type="button" class="btn btn-primary">' + fieldValue + '</button>';
+                  } else if (selectedFieldType === "Tables") {
+                    inputField = '<table class="table"><thead><tr><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr></thead><tbody><tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr><tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr><tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr></tbody></table>';
+                  } else if (selectedFieldType === "Video Field") {
+                    inputField = '<input type="file" accept="video/*">';
+                  } else if (selectedFieldType === "File Field") {
+                    inputField = '<input type="file">';
+                  } else if (selectedFieldType === "Audio Field") {
+                    inputField = '<input type="file" accept="audio/*">';
+                  }
+                }
                 var selectedFieldTypeHtml =
                   '<div class="draggable-label form-fieldtype" style="top: ' +
                   topPosition +
-                  'px;"><input type="text" value="' +
-                  selectedFieldType +
-                  '" readonly></div>';
+                  'px;">' + inputField + '</div>';
                 $(".grid-item").append(selectedFieldTypeHtml);
                 topPosition += 30; // Adjust vertical spacing as needed
               }
@@ -465,6 +512,7 @@
         // Update the height of the grid container
         $(".grid-container").css("height", maxTopPosition + 20 + "px"); // Add some extra space
       }
+
 
       // Event listener for the Preview button
       $(".Preview").click(previewFormValues);
