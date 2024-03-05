@@ -2,299 +2,179 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
-        .dynamic-form {
-            margin-right: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+  <style>
+    .dynamic-form {
+      margin-right: 20px;
+    }
 
-        .dynamic-field {
-            margin-top: 20px;
-        }
+    .dynamic-field {
+      margin-top: 20px;
+    }
 
-        input.form-control,
-        select.form-select {
-            width: 250px;
+    input.form-control,
+    select.form-select {
+      width: 250px;
+    }
 
-        }
+    body {
+      background: rgba(0, 123, 255, 0.1) !important;
+    }
 
-        body {
-            background: rgba(0, 123, 255, 0.1) !important;
+    .grid-container {
+      display: grid;
+      width: 100%;
+      height: 450px;
+      background: rgba(0, 123, 255, 0.1);
+      position: relative;
+    }
 
-        }
+    .grid-item {
+      border: 1px solid #2247ad;
+      padding: 20px;
+    }
 
+    .draggable-label {
+      position: absolute;
+      padding: 10px;
+      cursor: move;
+    }
 
-        .grid-container {
-            display: grid;
-            width: 100%;
-            height: 450px;
-            background: rgba(0, 123, 255, 0.1);
-            position: relative;
-        }
+    .form1-values {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
 
-        .grid-item {
-            border: 1px solid #2247ad;
-            padding: 20px;
-        }
+    .form-values label {
+      font-size: 18px;
+    }
 
-        .draggable-label {
-            position: absolute;
-            padding: 10px;
-            cursor: move;
-        }
+    .form1-fieldname {
+      position: absolute;
+      top: 50px;
 
-
-        .form1-values {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        .form-values label {
-            font-size: 18px;
-
-        }
-
-        .form1-fieldname {
-            position: absolute;
-            top: 50px;
-
-            left: 10px;
-
-        }
-
-        body {
-            background: #2247ad;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 200vh;
-            margin: 0;
-        }
-
-        #weather-container {
-            background: rgba(255, 255, 255, 0.3);
-            max-width: 400px;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            max-height: 800px;
-        }
-
-
-        .tab3input {
-            width: calc(100% - 16px);
-            padding: 8px;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 1px solid white;
-            margin-top: 20px;
-        }
-
-        .tab3button {
-            background: #2247ad;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 20px;
-            width: 100px;
-            font-size: 15px;
-        }
-
-        .tab3button:hover {
-            background: #2247adbe;
-        }
-
-        #temp-div p {
-            font-size: 60px;
-            margin-top: -30px;
-        }
-
-        #weather-info {
-            font-size: 20px;
-        }
-
-        #weather-icon {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 10px;
-            margin-bottom: 0;
-            display: none;
-        }
-
-        #hourly-forecast {
-            margin-top: 50px;
-            overflow-x: auto;
-            white-space: nowrap;
-            display: flex;
-            justify-content: space-between;
-            background-color: #2247adbe;
-            border-radius: 20px;
-        }
-
-        .hourly-item {
-            flex: 0 0 auto;
-            width: 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 10px;
-            color: rgb(0, 0, 0);
-        }
-
-        .hourly-item img {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 5px;
-        }
-
-        #hourly-heading {
-            color: #fff;
-            margin-top: 10px;
-        }
-
-        #weather-container {
-            align-items: center;
-        }
-    </style>
-    <title>Tabs</title>
+      left: 10px;
+    }
+  </style>
+  <title>Tabs</title>
 </head>
 
 <body>
+  <div class="bg-primary text-white">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active m-3 px-5 fs-5 text-dark" id="formCreationTab" data-bs-toggle="tab"
+          href="#tabContent1">Form creation Tab</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link m-3 px-5 fs-5 text-dark" id="alignmentTab" data-bs-toggle="tab" href="#tabContent2">Alignment
+          Tab</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">API</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="bg-primary text-white">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active m-3 px-5 fs-5 text-dark" id="formCreationTab" data-bs-toggle="tab"
-                    href="#tabContent1">Form creation Tab</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link m-3 px-5 fs-5 text-dark" id="alignmentTab" data-bs-toggle="tab"
-                    href="#tabContent2">Alignment
-                    Tab</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link m-3 px-5 fs-5 text-dark" id="tab3" data-bs-toggle="tab" href="#tabContent3">API</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="mt-5 mx-5 p-2 text-dark">
-
-        <div class="tab-content" id="formsContainer">
-            <div class="tab-pane fade show active" id="tabContent1">
-                <form id="projectForm" class="mb-3">
-                    <input id="searchInput" type="text" class="form-control mb-3 col-md-6" placeholder="Search...">
-                    <input id="projectName" type="text" placeholder="Enter project name">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <span id="errorMessage"></span>
-                </form>
-                <div id="tabContent1Forms">
-                    <form class="dynamic-form" id="Form1">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="form1-name" class="form-label">Form 1</label>
-                                <input type="text" class="form-control" id="form1-name" placeholder="Form 1">
-                            </div>
-                            <div class="col">
-                                <label for="form1-redirect" class="form-label"> Form 1 Redirect Path</label>
-                                <input type="text" class="form-control" id="form1-redirect" placeholder="Redirect Path">
-                            </div>
-                            <div class="col mt-4">
-                                <button type="button" class="btn btn-primary add-form">+</button>
-                            </div>
-                        </div>
-                        <div class="dynamic-field">
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="form1-field1" class="form-label"> Form1 Field Name 1</label>
-                                    <input type="text" class="form-control" id="form1-field1"
-                                        placeholder="Form1 Field Name 1">
-                                </div>
-                                <div class="col">
-                                    <label for="form1-fieldType1" class="form-label">Field Types</label>
-                                    <select class="form-select" id="form1-fieldType1">
-                                        <option value="text">Varchar Field</option>
-                                        <option value="text">Number Field</option>
-                                        <option value="text">Password</option>
-                                        <option value="text">Select Box</option>
-                                        <option value="text">Number Field</option>
-                                        <option value="text">Email</option>
-                                        <option value="text">Radio Button</option>
-                                        <option value="text">Calc Field</option>
-                                        <option value="text">Check Box</option>
-                                        <option value="text">Image</option>
-                                        <option value="text">Logo</option>
-                                        <option value="text">Comment Box</option>
-                                        <option value="text">Quantity Box</option>
-                                        <option value="text">Button</option>
-                                        <option value="text">Tables</option>
-                                        <option value="text">Video Field</option>
-                                        <option value="text">File Field</option>
-                                        <option value="text">Audio Field</option>
-                                    </select>
-                                </div>
-                                <div class="col d-flex mt-4">
-                                    <div class="ms-auto">
-                                        <button type="button" class="btn btn-primary add-field">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="mt-4">
-                    <button type="button" class="btn btn-primary Submit">Submit</button>
-                    <button type="button" class="btn btn-danger Cancel">cancel</button>
-                    <button type="button" class="btn btn-secondary Reset">Reset</button>
-                    <button type="button" class="btn btn-success Preview">Preview</button>
-                </div>
-
+  <div class="mt-5 mx-5 p-2 text-dark">
+    <div class="tab-content" id="formsContainer">
+      <div class="tab-pane fade show active" id="tabContent1">
+        <form id="projectForm" class="mb-3">
+          <input id="searchInput" type="text" class="form-control mb-3 col-md-6" placeholder="Search..." />
+          <input id="projectName" type="text" placeholder="Enter project name" />
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <span id="errorMessage"></span>
+        </form>
+        <div id="tabContent1Forms">
+          <form class="dynamic-form" id="Form1">
+            <div class="row mb-3">
+              <div class="col">
+                <label for="form1-name" class="form-label">Form 1</label>
+                <input type="text" class="form-control" id="form1-name" placeholder="Form 1" />
+              </div>
+              <div class="col">
+                <label for="form1-redirect" class="form-label">
+                  Form 1 Redirect Path</label>
+                <input type="text" class="form-control" id="form1-redirect" placeholder="Redirect Path" />
+              </div>
+              <div class="col mt-4">
+                <button type="button" class="btn btn-primary add-form">
+                  +
+                </button>
+              </div>
             </div>
-
-            <div class="tab-pane fade" id="tabContent2">
-                <div class="grid-container">
-                    <div class="grid-item">
-                    </div>
+            <div class="dynamic-field">
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="form1-field1" class="form-label">
+                    Form1 Field Name 1</label>
+                  <input type="text" class="form-control" id="form1-field1" placeholder="Form1 Field Name 1" />
                 </div>
-            </div>
-
-
-
-            <div class="tab-pane fade" id="tabContent3" style="height: 300px;">
-                <div id="weather-container">
-                    <h2>Weather App</h2>
-                    <input type="text" id="city" class="tab3input" placeholder="Enter city">
-                    <button onclick="getWeather()" class="tab3button">Submit</button>
-
-                    <img id="weather-icon" alt="Weather Icon">
-
-                    <div id="temp-div"></div>
-
-                    <div id="weather-info"></div>
-
-                    <div id="hourly-forecast"></div>
+                <div class="col">
+                  <label for="form1-fieldType1" class="form-label">Field Types</label>
+                  <select class="form-select" id="form1-fieldType1">
+                    <option value="text">Varchar Field</option>
+                    <option value="text">Number Field</option>
+                    <option value="text">Password</option>
+                    <option value="text">Select Box</option>
+                    <option value="text">Number Field</option>
+                    <option value="text">Email</option>
+                    <option value="text">Radio Button</option>
+                    <option value="text">Calc Field</option>
+                    <option value="text">Check Box</option>
+                    <option value="text">Image</option>
+                    <option value="text">Logo</option>
+                    <option value="text">Comment Box</option>
+                    <option value="text">Quantity Box</option>
+                    <option value="text">Button</option>
+                    <option value="text">Tables</option>
+                    <option value="text">Video Field</option>
+                    <option value="text">File Field</option>
+                    <option value="text">Audio Field</option>
+                  </select>
                 </div>
+                <div class="col d-flex mt-4">
+                  <div class="ms-auto">
+                    <button type="button" class="btn btn-primary add-field">
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </form>
         </div>
+        <div class="mt-4">
+          <button type="button" class="btn btn-primary Submit">Submit</button>
+          <button type="button" class="btn btn-danger Cancel">cancel</button>
+          <button type="button" class="btn btn-secondary Reset">Reset</button>
+          <button type="button" class="btn btn-success Preview">
+            Preview
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tabContent2">
+        <div class="grid-container">
+          <div class="grid-item"></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="tabContent3" style="height: 300px"></div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 
-
-    <script>
-        $(document).ready(function () {
-
-            function generateFormHtml(formId) {
-                return `
+  <script>
+    $(document).ready(function () {
+      function generateFormHtml(formId) {
+        return `
           <form class="dynamic-form" id="${formId}">
             <div class="row mb-3">
               <div class="col">
@@ -349,42 +229,42 @@
             </div>
           </form>
         `;
-            }
+      }
 
-            function addForm() {
-                // Find all existing forms
-                var existingForms = $('.dynamic-form');
-                // Start counting from the next available number
-                var formCounter = 1;
-                existingForms.each(function () {
-                    var idNumber = parseInt($(this).attr('id').replace('Form', ''));
-                    formCounter = Math.max(formCounter, idNumber + 1);
-                });
-                var newFormId = 'Form' + formCounter;
-                var newFormHtml = generateFormHtml(newFormId);
-                $('#tabContent1Forms').append(newFormHtml);
-            }
+      function addForm() {
+        // Find all existing forms
+        var existingForms = $(".dynamic-form");
+        // Start counting from the next available number
+        var formCounter = 1;
+        existingForms.each(function () {
+          var idNumber = parseInt($(this).attr("id").replace("Form", ""));
+          formCounter = Math.max(formCounter, idNumber + 1);
+        });
+        var newFormId = "Form" + formCounter;
+        var newFormHtml = generateFormHtml(newFormId);
+        $("#tabContent1Forms").append(newFormHtml);
+      }
 
-            function removeForm() {
-                $(this).closest(".dynamic-form").remove();
-            }
+      function removeForm() {
+        $(this).closest(".dynamic-form").remove();
+      }
 
-            function addField(formId) {
-                var existingFields = $('#' + formId + ' .dynamic-field').length;
-                var maxFieldNumber = 1;
+      function addField(formId) {
+        var existingFields = $("#" + formId + " .dynamic-field").length;
+        var maxFieldNumber = 1;
 
-                // Find the maximum field number among existing fields
-                $('#' + formId + ' .dynamic-field').each(function () {
-                    var id = $(this).find('input').attr('id');
-                    var fieldNumber = parseInt(id.split('Field')[1]);
-                    if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
-                        maxFieldNumber = fieldNumber;
-                    }
-                });
+        // Find the maximum field number among existing fields
+        $("#" + formId + " .dynamic-field").each(function () {
+          var id = $(this).find("input").attr("id");
+          var fieldNumber = parseInt(id.split("Field")[1]);
+          if (!isNaN(fieldNumber) && fieldNumber > maxFieldNumber) {
+            maxFieldNumber = fieldNumber;
+          }
+        });
 
-                var nextFieldNumber = maxFieldNumber + 1;
+        var nextFieldNumber = maxFieldNumber + 1;
 
-                var newField = `
+        var newField = `
           <div class="dynamic-field">
             <div class="row mb-3">
               <div class="col">
@@ -423,253 +303,234 @@
             </div>
           </div>`;
 
-                $('#' + formId).append(newField);
-            }
+        $("#" + formId).append(newField);
+      }
 
-            function removeField() {
-                $(this).closest(".dynamic-field").remove();
-            }
-            // Function to reset all input fields within a form container
-            function resetFields(formContainerId) {
-                // Remove all dynamically added forms except the first one
-                $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
+      function removeField() {
+        $(this).closest(".dynamic-field").remove();
+      }
+      // Function to reset all input fields within a form container
+      function resetFields(formContainerId) {
+        // Remove all dynamically added forms except the first one
+        $("#" + formContainerId + " .dynamic-form:not(:first)").remove();
 
-                // Reset the input values of the initial form
-                $("#" + formContainerId + " .dynamic-form:first input[type='text']").val('');
+        // Reset the input values of the initial form
+        $(
+          "#" + formContainerId + " .dynamic-form:first input[type='text']"
+        ).val("");
 
-                // Remove all dynamically added fields except the first one in each form
-                $("#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)").remove();
+        // Remove all dynamically added fields except the first one in each form
+        $(
+          "#" + formContainerId + " .dynamic-form .dynamic-field:not(:first)"
+        ).remove();
 
-                // Reset the form counter to 1
-                formCounter = 1;
-            }
-            $("#searchInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $(".dynamic-form").filter(function () {
-                    $(this).toggle($(this).attr('id').toLowerCase().indexOf(value) > -1)
-                });
-            });
-            $(document).ready(function () {
-                $('#projectForm').submit(function (e) {
-                    e.preventDefault();
-                    var projectName = $('#projectName').val();
-
-                    // Check if projectName is empty
-                    if (!projectName.trim()) {
-                        $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Please enter a project name');
-                        return; // Stop form submission
-                    }
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/save_project/',
-                        data: {
-                            'project_name': projectName,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}'
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                $('#errorMessage').removeClass('bg-danger').addClass('bg-success').text(response.message);
-                            } else {
-                                $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text(response.message);
-                            }
-                            $('#projectName').val('');
-                            setTimeout(function () {
-                                $('#errorMessage').removeClass('bg-success bg-danger').text('');
-                            }, 2000);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
-                            $('#errorMessage').removeClass('bg-success').addClass('bg-danger').text('Project name already used!!');
-                        }
-                    });
-                });
-            });
-
-            function previewFormValues() {
-                // Clear existing labels and inputs in the grid item
-                // Switch to the Alignment Tab
-                $('#alignmentTab').tab('show');
-
-                $('.grid-item').empty();
-
-                var topPosition = 0; // Adjust as needed
-                var maxTopPosition = 20; // Initialize the maximum top position
-
-                // Loop through each form
-                $('.dynamic-form').each(function (index, form) {
-                    var formId = $(form).attr('id');
-                    var formName = $(form).find('input[id$="-name"]').val().trim();
-                    var formRedirect = $(form).find('input[id$="-redirect"]').val().trim();
-
-                    // Add space between forms
-                    topPosition += 30; // Increase the spacing between forms
-
-                    // Create draggable labels for form name and redirect path
-                    if (formName !== '') {
-                        var formNameHtml = '<div class="draggable-label form-values" style="top: ' + topPosition + 'px;"><label>' + formName + '</label></div>';
-                        $('.grid-item').append(formNameHtml);
-                        topPosition += 30; // Adjust vertical spacing as needed
-                    }
-
-                    if (formRedirect !== '') {
-                        var formRedirectHtml = '<div class="draggable-label form-values" style="top: ' + topPosition + 'px;"><label>' + formRedirect + '</label></div>';
-                        $('.grid-item').append(formRedirectHtml);
-                        topPosition += 30; // Adjust vertical spacing as needed
-                    }
-
-                    // Loop through each field in the form
-                    $(form).find('.dynamic-field input[type="text"]').each(function () {
-                        var fieldValue = $(this).val().trim();
-                        if (fieldValue !== '') {
-                            // Create draggable labels for field values
-                            var fieldValueHtml = '<div class="draggable-label form-fieldname" style="top: ' + topPosition + 'px;"><label>' + fieldValue + '</label></div>';
-                            $('.grid-item').append(fieldValueHtml);
-                            topPosition += 30; // Adjust vertical spacing as needed
-                        }
-
-                        // Retrieve and display selected value from the corresponding dropdown box
-                        var selectedFieldType = $(this).closest('.row').find('select').find('option:selected').text();
-                        if (selectedFieldType !== '') {
-                            // Create input for selected value
-                            var selectedFieldTypeHtml = '<div class="draggable-label form-fieldtype" style="top: ' + topPosition + 'px;"><input type="text" value="' + selectedFieldType + '" readonly></div>';
-                            $('.grid-item').append(selectedFieldTypeHtml);
-                            topPosition += 30; // Adjust vertical spacing as needed
-                        }
-                    });
-
-                    // Update the maximum top position
-                    maxTopPosition = Math.max(maxTopPosition, topPosition);
-                });
-
-                // Make the labels draggable
-                $('.draggable-label').draggable({
-                    containment: '.grid-container',
-                    scroll: false
-                });
-
-                // Update the height of the grid container
-                $('.grid-container').css('height', maxTopPosition + 20 + 'px'); // Add some extra space
-            }
-
-            // Event listener for the Preview button
-            $(".Preview").click(previewFormValues);
-
-            // Event listener for the reset button
-            $(".Reset").click(function () {
-                resetFields('formsContainer');
-            });
-
-            // Event listeners for adding and removing forms and fields
-            $("#tabContent1").on("click", ".add-form", addForm);
-            $("#formsContainer").on("click", ".remove-form", removeForm);
-            $("#tabContent1").on("click", ".add-field", function () {
-                var formId = $(this).closest('.dynamic-form').attr('id');
-                addField(formId);
-            });
-            $("#tabContent1").on("click", ".remove-field", removeField);
-
+        // Reset the form counter to 1
+        formCounter = 1;
+      }
+      $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".dynamic-form").filter(function () {
+          $(this).toggle(
+            $(this).attr("id").toLowerCase().indexOf(value) > -1
+          );
         });
-        function getWeather() {
-            const apiKey = '722b3f1a6a7e3686a15d0fabe263f536';
-            const city = document.getElementById('city').value;
+      });
+      $(document).ready(function () {
+        $("#projectForm").submit(function (e) {
+          e.preventDefault();
+          var projectName = $("#projectName").val();
 
-            if (!city) {
-                alert('Please enter a city');
-                return;
-            }
+          // Check if projectName is empty
+          if (!projectName.trim()) {
+            $("#errorMessage")
+              .removeClass("bg-success")
+              .addClass("bg-danger")
+              .text("Please enter a project name");
+            return; // Stop form submission
+          }
 
-            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+          $.ajax({
+            type: "POST",
+            url: "/save_project/",
+            data: {
+              project_name: projectName,
+              csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (response) {
+              if (response.success) {
+                $("#errorMessage")
+                  .removeClass("bg-danger")
+                  .addClass("bg-success")
+                  .text(response.message);
+              } else {
+                $("#errorMessage")
+                  .removeClass("bg-success")
+                  .addClass("bg-danger")
+                  .text(response.message);
+              }
+              $("#projectName").val("");
+              setTimeout(function () {
+                $("#errorMessage")
+                  .removeClass("bg-success bg-danger")
+                  .text("");
+              }, 2000);
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+              $("#errorMessage")
+                .removeClass("bg-success")
+                .addClass("bg-danger")
+                .text("Project name already used!!");
+            },
+          });
+        });
+      });
 
-            fetch(currentWeatherUrl)
-                .then(response => response.json())
-                .then(data => {
-                    displayWeather(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching current weather data:', error);
-                    alert('Error fetching current weather data. Please try again.');
-                });
+      function previewFormValues() {
+        // Clear existing labels and inputs in the grid item
+        // Switch to the Alignment Tab
+        $("#alignmentTab").tab("show");
 
-            fetch(forecastUrl)
-                .then(response => response.json())
-                .then(data => {
-                    displayHourlyForecast(data.list);
-                })
-                .catch(error => {
-                    console.error('Error fetching hourly forecast data:', error);
-                    alert('Error fetching hourly forecast data. Please try again.');
-                });
-        }
+        $(".grid-item").empty();
 
-        function displayWeather(data) {
-            const tempDivInfo = document.getElementById('temp-div');
-            const weatherInfoDiv = document.getElementById('weather-info');
-            const weatherIcon = document.getElementById('weather-icon');
-            const hourlyForecastDiv = document.getElementById('hourly-forecast');
+        var topPosition = 0; // Adjust as needed
+        var maxTopPosition = 20; // Initialize the maximum top position
 
-            // Clear previous content
-            weatherInfoDiv.innerHTML = '';
-            hourlyForecastDiv.innerHTML = '';
-            tempDivInfo.innerHTML = '';
+        // Loop through each form
+        $(".dynamic-form").each(function (index, form) {
+          var formId = $(form).attr("id");
+          var formName = $(form).find('input[id$="-name"]').val().trim();
 
-            if (data.cod === '404') {
-                weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
-            } else {
-                const cityName = data.name;
-                const temperature = Math.round(data.main.temp - 273.15); // Convert to Celsius
-                const description = data.weather[0].description;
-                const iconCode = data.weather[0].icon;
-                const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+          // Add space between forms
+          topPosition += 30; // Increase the spacing between forms
 
-                const temperatureHTML = `
-            <p>${temperature}°C</p>
-        `;
+          // Create draggable labels for form name and redirect path
+          if (formName !== "") {
+            var formNameHtml =
+              '<div class="draggable-label form-values" style="top: ' +
+              topPosition +
+              'px;"><label>' +
+              formName +
+              "</label></div>";
+            $(".grid-item").append(formNameHtml);
+            topPosition += 30; // Adjust vertical spacing as needed
+          }
 
-                const weatherHtml = `
-            <p>${cityName}</p>
-            <p>${description}</p>
-        `;
+          // Loop through each field in the form
+          $(form)
+            .find('.dynamic-field input[type="text"]')
+            .each(function () {
+              var fieldValue = $(this).val().trim();
+              if (fieldValue !== "") {
+                // Create draggable labels for field values
+                var fieldValueHtml =
+                  '<div class="draggable-label form-fieldname" style="top: ' +
+                  topPosition +
+                  'px;"><label>' +
+                  fieldValue +
+                  "</label></div>";
+                $(".grid-item").append(fieldValueHtml);
+                topPosition += 30; // Adjust vertical spacing as needed
+              }
 
-                tempDivInfo.innerHTML = temperatureHTML;
-                weatherInfoDiv.innerHTML = weatherHtml;
-                weatherIcon.src = iconUrl;
-                weatherIcon.alt = description;
-                showImage();
-            }
-        }
+              // Retrieve and display selected value from the corresponding dropdown box
+              var selectedFieldType = $(this)
+                .closest(".row")
+                .find("select")
+                .find("option:selected")
+                .text();
+              if (selectedFieldType !== "") {
+                // Create input for selected value
+                var inputField = '';
+                if (selectedFieldType !== "") {
+                  // Create input for selected value
+                  var inputField = '';
+                  if (selectedFieldType === "Varchar Field") {
+                    inputField = '<input type="text" class="form-control" placeholder="Varchar Field">';
+                  } else if (selectedFieldType === "Number Field") {
+                    inputField = '<input type="number" class="form-control" placeholder="Number Field">';
+                  } else if (selectedFieldType === "Password") {
+                    inputField = '<input type="password" class="form-control" placeholder="Password">';
+                  } else if (selectedFieldType === "Select Box") {
+                    inputField = '<select class="form-select"><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>';
+                  } else if (selectedFieldType === "Email") {
+                    inputField = '<input type="email" class="form-control" placeholder="Email">';
+                  } else if (selectedFieldType === "Radio Button") {
+                    // Option 1
+                    inputField += '<input type="radio" name="' + formId + '" value="Yes"> Yes<br>';
 
-        function displayHourlyForecast(hourlyData) {
-            const hourlyForecastDiv = document.getElementById('hourly-forecast');
-
-            const next24Hours = hourlyData.slice(0, 8); // Display the next 24 hours (3-hour intervals)
-
-            next24Hours.forEach(item => {
-                const dateTime = new Date(item.dt * 1000); // Convert timestamp to milliseconds
-                const hour = dateTime.getHours();
-                const temperature = Math.round(item.main.temp - 273.15); // Convert to Celsius
-                const iconCode = item.weather[0].icon;
-                const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
-
-                const hourlyItemHtml = `
-            <div class="hourly-item">
-                <span>${hour}:00</span>
-                <img src="${iconUrl}" alt="Hourly Weather Icon">
-                <span>${temperature}°C</span>
-            </div>
-        `;
-
-                hourlyForecastDiv.innerHTML += hourlyItemHtml;
+                    // Option 2
+                    inputField += '<input type="radio" name="' + formId + '" value="No">  No<br>';
+                  }
+                  else if (selectedFieldType === "Check Box") {
+                    var checkboxOptions = ["Option 1", "Option 2"]; // Add more options as needed
+                    var checkboxHtml = '';
+                    checkboxOptions.forEach(function (option) {
+                      checkboxHtml += '<input type="checkbox" name="' + formId + '" value="' + option + '">' + option + '<br>';
+                    });
+                    inputField = checkboxHtml;
+                  } else if (selectedFieldType === "Image") {
+                    inputField = '<input type="file" accept="image/*">';
+                  } else if (selectedFieldType === "Logo") {
+                    inputField = '<input type="file" accept="image/*">';
+                  } else if (selectedFieldType === "Comment Box") {
+                    inputField = '<textarea class="form-control" rows="2" placeholder="Comment Box"></textarea>';
+                  } else if (selectedFieldType === "Quantity Box") {
+                    inputField = '<input type="number" class="form-control" placeholder="Quantity Box">';
+                  } else if (selectedFieldType === "Button") {
+                    inputField = '<button type="button" class="btn btn-primary">' + fieldValue + '</button>';
+                  } else if (selectedFieldType === "Tables") {
+                    inputField = '<table class="table"><thead><tr><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr></thead><tbody><tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr><tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr><tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr></tbody></table>';
+                  } else if (selectedFieldType === "Video Field") {
+                    inputField = '<input type="file" accept="video/*">';
+                  } else if (selectedFieldType === "File Field") {
+                    inputField = '<input type="file">';
+                  } else if (selectedFieldType === "Audio Field") {
+                    inputField = '<input type="file" accept="audio/*">';
+                  }
+                }
+                var selectedFieldTypeHtml =
+                  '<div class="draggable-label form-fieldtype" style="top: ' +
+                  topPosition +
+                  'px;">' + inputField + '</div>';
+                $(".grid-item").append(selectedFieldTypeHtml);
+                topPosition += 30; // Adjust vertical spacing as needed
+              }
             });
-        }
 
-        function showImage() {
-            const weatherIcon = document.getElementById('weather-icon');
-            weatherIcon.style.display = 'block'; // Make the image visible once it's loaded
-        }
+          // Update the maximum top position
+          maxTopPosition = Math.max(maxTopPosition, topPosition);
+        });
 
-    </script>
+        // Make the labels draggable
+        $(".draggable-label").draggable({
+          containment: ".grid-container",
+          scroll: false,
+        });
+
+        // Update the height of the grid container
+        $(".grid-container").css("height", maxTopPosition + 20 + "px"); // Add some extra space
+      }
+
+
+      // Event listener for the Preview button
+      $(".Preview").click(previewFormValues);
+
+      // Event listener for the reset button
+      $(".Reset").click(function () {
+        resetFields("formsContainer");
+      });
+
+      // Event listeners for adding and removing forms and fields
+      $("#tabContent1").on("click", ".add-form", addForm);
+      $("#formsContainer").on("click", ".remove-form", removeForm);
+      $("#tabContent1").on("click", ".add-field", function () {
+        var formId = $(this).closest(".dynamic-form").attr("id");
+        addField(formId);
+      });
+      $("#tabContent1").on("click", ".remove-field", removeField);
+    });
+  </script>
 </body>
 
 </html>
